@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BMI</string>
+    <string name="this_is_first_photo">This is first photo</string>
+    <string name="provide_mass">Provide mass in kg</string>
+    <string name="mass">Mass [kg]</string>
+    <string name="height">Height [cm]</string>
+    <string name="provide_height">Provide height in cm</string>
+    <string name="bmi">BMI</string>
+    <string name="count">Count</string>
+    <string name="switch_activity">Switch Activity</string>
+</resources>

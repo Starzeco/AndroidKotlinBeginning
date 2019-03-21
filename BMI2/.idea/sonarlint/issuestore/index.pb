@@ -13,3 +13,9 @@ P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 Z
 *app/src/main/java/com/example/bmi/About.kt,c/f/cf48c70b4006c3c487ce797e5519e74021b54f8a
+<
+build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
+@
+app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
+i
+9app/src/main/java/com/example/bmi/logic/BmiForImperial.kt,7/a/7a101c2148c911f55a5093d1092058197b765672

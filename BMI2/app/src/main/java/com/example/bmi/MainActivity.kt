@@ -5,22 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import com.example.bmi.logic.Bmi
+import com.example.bmi.logic.BmiForImperial
 import com.example.bmi.logic.BmiForKgCm
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Double.POSITIVE_INFINITY
 import kotlin.IllegalArgumentException
 
 class MainActivity : AppCompatActivity() {
-
+    var bmi: Bmi? = BmiForKgCm(0,0)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bmi = BmiForKgCm(0,0)
+
         var term=getString(R.string.wrong_data)
 
         countButton.isEnabled=false
-
         HeightInput.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
@@ -52,26 +56,44 @@ class MainActivity : AppCompatActivity() {
         countButton.setOnClickListener {
             var result:Double
             try{
-                bmi.height = HeightInput.text.toString().toInt()
-                bmi.mass = MassInput.text.toString().toInt()
-                result = bmi.countBmi()
+                bmi?.apply {
+                    changeHeight(HeightInput.text.toString().toInt())
+                    changeMass(MassInput.text.toString().toInt())
+
+                }
+                result = bmi?.countBmi() ?: 0.0
             }catch(e: IllegalArgumentException){
                 result = 0.0
-                if(HeightInput.text.toString().toInt() !in 100..200){
-                    HeightInput.error = getString(R.string.height_restriction)
-                    score.text = ""
-                    scoreText.text = getString(R.string.wrong_data)
+                if(bmi is BmiForKgCm){
+                    if(HeightInput.text.toString().toInt() !in 100..200){
+                        HeightInput.error = getString(R.string.height_restriction)
+                        score.text = ""
+                        scoreText.text = getString(R.string.wrong_data)
+                    }
+                    if(MassInput.text.toString().toInt() !in 20..150){
+                        MassInput.error = getString(R.string.mass_restriction)
+                        score.text= ""
+                        scoreText.text = getString(R.string.wrong_data)
+                    }
                 }
-                if(MassInput.text.toString().toInt() !in 20..150){
-                    MassInput.error = getString(R.string.mass_restriction)
-                    score.text= ""
-                    scoreText.text = getString(R.string.wrong_data)
+                if(bmi is BmiForImperial){
+                    if(HeightInput.text.toString().toInt() !in 40..80){
+                        HeightInput.error = getString(R.string.height_restriction_imp)
+                        score.text = ""
+                        scoreText.text = getString(R.string.wrong_data)
+                    }
+                    if(MassInput.text.toString().toInt() !in 40..300){
+                        MassInput.error = getString(R.string.mass_restriction_imp)
+                        score.text= ""
+                        scoreText.text = getString(R.string.wrong_data)
+                    }
                 }
+
             }
             when(result){
                 in 0.1..18.4 -> {
                     term=getString(R.string.underweight)
-                    score.setTextColor(resources.getColor(R.color.verdigris))
+                    score.setTextColor(resources.getColor(R.color.grynszpan))
                 }
                 in 18.5..24.9 -> {
                     term=getString(R.string.normal_weight)
@@ -97,28 +119,62 @@ class MainActivity : AppCompatActivity() {
 
         }
         switch_activity.setOnClickListener{
-            val aboutIntent =Intent(this, About::class.java)
-            startActivity(aboutIntent)
+            //val aboutIntent =Intent(this, About::class.java)
+            //startActivity(aboutIntent)
         }
 
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        MassInput.setText(savedInstanceState!!.getString(getString(R.string.mass)))
-        HeightInput.setText(savedInstanceState!!.getString(getString(R.string.height)))
-        score.text = savedInstanceState!!.getString(getString(R.string.score))
-        scoreText.text = savedInstanceState!!.getString(getString(R.string.score_text))
-        score.setTextColor(savedInstanceState!!.getInt(getString(R.string.color)))
+        if(savedInstanceState != null){
+            MassInput.setText(savedInstanceState.getString(getString(R.string.mass)))
+            HeightInput.setText(savedInstanceState.getString(getString(R.string.height)))
+            score.text = savedInstanceState.getString(getString(R.string.score))
+            scoreText.text = savedInstanceState.getString(getString(R.string.score_text))
+            score.setTextColor(savedInstanceState.getInt(getString(R.string.color)))
+        }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState!!.putString(getString(R.string.mass), MassInput.text.toString())
-        outState!!.putString(getString(R.string.height), HeightInput.text.toString())
-        outState!!.putString(getString(R.string.score), score.text.toString())
-        outState!!.putString(getString(R.string.score_text), scoreText.text.toString())
-        outState!!.putInt(getString(R.string.color), score.currentTextColor)
+        if(outState != null){
+            outState.putString(getString(R.string.mass), MassInput.text.toString())
+            outState.putString(getString(R.string.height), HeightInput.text.toString())
+            outState.putString(getString(R.string.score), score.text.toString())
+            outState.putString(getString(R.string.score_text), scoreText.text.toString())
+            outState.putInt(getString(R.string.color), score.currentTextColor)
+        }
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean{
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item?.itemId
+
+        if(id == R.id.about_id){
+            val aboutIntent = Intent(this, About::class.java)
+            startActivity(aboutIntent)
+            return true
+        }
+        if(id == R.id.change_id){
+            bmi=BmiForImperial(0,0)
+            mass.text = getString(R.string.mass_lb)
+            textView2.text = getString(R.string.height_in)
+            HeightInput.setText("")
+            MassInput.setText("")
+            return true
+        }
+        if(id == R.id.history_id){
+
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }

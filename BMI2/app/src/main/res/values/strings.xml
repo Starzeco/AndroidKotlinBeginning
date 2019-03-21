@@ -19,4 +19,11 @@
     <string name="score">Score</string>
     <string name="score_text">ScoreText</string>
     <string name="color">Color</string>
+    <string name="about">About</string>
+    <string name="change">Change Units</string>
+    <string name="history">History</string>
+    <string name="mass_lb">Mass [lb]</string>
+    <string name="height_in">Height [in]</string>
+    <string name="height_restriction_imp">Height should be in interval 40-80</string>
+    <string name="mass_restriction_imp">Mass should be in interval 30-300</string>
 </resources>

@@ -96,4 +96,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        MassInput.setText(savedInstanceState!!.getString(getString(R.string.mass)))
+        HeightInput.setText(savedInstanceState!!.getString(getString(R.string.height)))
+        score.text = savedInstanceState!!.getString(getString(R.string.score))
+        scoreText.text = savedInstanceState!!.getString(getString(R.string.score_text))
+        score.setTextColor(savedInstanceState!!.getInt(getString(R.string.color)))
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState!!.putString(getString(R.string.mass), MassInput.text.toString())
+        outState!!.putString(getString(R.string.height), HeightInput.text.toString())
+        outState!!.putString(getString(R.string.score), score.text.toString())
+        outState!!.putString(getString(R.string.score_text), scoreText.text.toString())
+        outState!!.putInt(getString(R.string.color), score.currentTextColor)
+    }
+
 }

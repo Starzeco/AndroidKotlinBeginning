@@ -16,4 +16,7 @@
     <string name="over_weight">Overweight</string>
     <string name="obese_weight">Obese</string>
     <string name="extremly_obese_weight">Extremly obese</string>
+    <string name="score">Score</string>
+    <string name="score_text">ScoreText</string>
+    <string name="color">Color</string>
 </resources>

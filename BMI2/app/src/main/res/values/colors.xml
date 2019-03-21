@@ -3,4 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="pompeianRose">#B80000</color>
+    <color name="LapisLazuli">#26619C</color>
+    <color name="verdigris">#00A693</color>
 </resources>

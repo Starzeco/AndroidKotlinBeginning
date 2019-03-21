@@ -8,8 +8,8 @@
     <string name="bmi">BMI</string>
     <string name="count">Count</string>
     <string name="switch_activity">Switch Activity</string>
-    <string name="height_restriction">Height should in interval 100-200</string>
-    <string name="mass_restriction">Mass should in interval 20-150</string>
+    <string name="height_restriction">Height should be in interval 100-200</string>
+    <string name="mass_restriction">Mass should be in interval 20-150</string>
     <string name="wrong_data">Wrong data</string>
     <string name="underweight">Underweight</string>
     <string name="normal_weight">Normal</string>

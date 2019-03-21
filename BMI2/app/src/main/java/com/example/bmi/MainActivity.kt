@@ -57,10 +57,16 @@ class MainActivity : AppCompatActivity() {
                 result = bmi.countBmi()
             }catch(e: IllegalArgumentException){
                 result = 0.0
-                if(HeightInput.text.toString().toInt() !in 100..200)
+                if(HeightInput.text.toString().toInt() !in 100..200){
                     HeightInput.error = getString(R.string.height_restriction)
-                if(MassInput.text.toString().toInt() !in 20..150)
+                    score.text = ""
+                    scoreText.text = getString(R.string.wrong_data)
+                }
+                if(MassInput.text.toString().toInt() !in 20..150){
                     MassInput.error = getString(R.string.mass_restriction)
+                    score.text= ""
+                    scoreText.text = getString(R.string.wrong_data)
+                }
             }
             when(result){
                 in 0.1..18.4 -> {
@@ -86,8 +92,9 @@ class MainActivity : AppCompatActivity() {
             }
             if(result != 0.0){
                 score.text = "%.2f".format(result)
+                scoreText.text=term
             }
-            scoreText.text=term
+
         }
         switch_activity.setOnClickListener{
             val aboutIntent =Intent(this, About::class.java)

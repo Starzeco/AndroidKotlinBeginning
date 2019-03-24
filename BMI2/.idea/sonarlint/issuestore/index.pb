@@ -19,3 +19,9 @@ Z
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
 i
 9app/src/main/java/com/example/bmi/logic/BmiForImperial.kt,7/a/7a101c2148c911f55a5093d1092058197b765672
+\
+,app/src/main/java/com/example/bmi/InfoBMI.kt,d/1/d1546d6350b3afcd1b6ac2562d97ba7f8a4d93fb
+\
+,app/src/main/java/com/example/bmi/History.kt,c/c/cc47edc45dc8cf95d01bd1abc38bd54de6537c27
+b
+2app/src/main/java/com/example/bmi/CustomAdapter.kt,a/c/ac47924c4252c9626031d11a30c66eb48535ad7a

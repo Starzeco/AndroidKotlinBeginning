@@ -16,7 +16,12 @@ import java.lang.Double.POSITIVE_INFINITY
 import kotlin.IllegalArgumentException
 
 class MainActivity : AppCompatActivity() {
+
     var bmi: Bmi? = BmiForKgCm(0,0)
+    val heightList = ArrayList<String>()
+    val massList = ArrayList<String>()
+    val bmiList = ArrayList<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -62,6 +67,14 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 result = bmi?.countBmi() ?: 0.0
+                if(bmi is BmiForKgCm){
+                    heightList.add(HeightInput.text.toString()+getString(R.string.cm))
+                    massList.add(MassInput.text.toString()+getString(R.string.kg))
+                }else{
+                    heightList.add(HeightInput.text.toString()+getString(R.string.in_unit))
+                    massList.add(MassInput.text.toString()+ getString(R.string.lb))
+                }
+                bmiList.add("%.2f".format(result))
             }catch(e: IllegalArgumentException){
                 if(bmi is BmiForKgCm){
                     if(HeightInput.text.toString().toInt() !in 100..200){
@@ -135,9 +148,20 @@ class MainActivity : AppCompatActivity() {
             score.text = savedInstanceState.getString(getString(R.string.score))
             scoreText.text = savedInstanceState.getString(getString(R.string.score_text))
             score.setTextColor(savedInstanceState.getInt(getString(R.string.color)))
+            val temp_heigtList = savedInstanceState.getStringArrayList(getString(R.string.height_list))
+            val temp_massList = savedInstanceState.getStringArrayList(getString(R.string.mass_list))
+            val temp_bmiList = savedInstanceState.getStringArrayList(getString(R.string.bmi_list))
+            val size = temp_bmiList.size-1
+            for (i in 0..size){
+                bmiList.add(temp_bmiList[i])
+                heightList.add(temp_heigtList[i])
+                massList.add(temp_massList[i])
+            }
         }
 
     }
+
+
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
@@ -147,6 +171,9 @@ class MainActivity : AppCompatActivity() {
             outState.putString(getString(R.string.score), score.text.toString())
             outState.putString(getString(R.string.score_text), scoreText.text.toString())
             outState.putInt(getString(R.string.color), score.currentTextColor)
+            outState.putStringArrayList(getString(R.string.height_list), heightList)
+            outState.putStringArrayList(getString(R.string.mass_list), massList)
+            outState.putStringArrayList(getString(R.string.bmi_list), bmiList)
         }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean{
@@ -186,7 +213,11 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         if(id == R.id.history_id){
-
+            val historyIntent = Intent(this, History::class.java)
+            historyIntent.putStringArrayListExtra(getString(R.string.height_list), heightList)
+            historyIntent.putStringArrayListExtra(getString(R.string.mass_list), massList)
+            historyIntent.putStringArrayListExtra(getString(R.string.bmi_list), bmiList)
+            startActivity(historyIntent)
             return true
         }
 

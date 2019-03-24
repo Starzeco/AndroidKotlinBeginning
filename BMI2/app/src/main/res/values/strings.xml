@@ -38,4 +38,13 @@
     <string name="your_height">Your height</string>
     <string name="your_mass">Your mass</string>
     <string name="your_bmi">Your BMI</string>
+    <string name="height_list">height_list</string>
+    <string name="mass_list">mass_list</string>
+    <string name="bmi_list">bmi_list</string>
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
+    <string name="in_unit">in</string>
+    <string name="lb">lb</string>
+    <string name="just_height">Height</string>
+    <string name="just_mass">Mass</string>
 </resources>

@@ -26,4 +26,16 @@
     <string name="height_in">Height [in]</string>
     <string name="height_restriction_imp">Height should be in interval 40-80</string>
     <string name="mass_restriction_imp">Mass should be in interval 30-300</string>
+    <string name="about_photo">About_photo</string>
+    <string name="provide_mass_lb">Provide mass in lb</string>
+    <string name="provide_height_in">Provide height in in</string>
+    <string name="author_info">Marcel Krakowiak</string>
+    <string name="student">Made by student</string>
+    <string name="result_info">result_info</string>
+    <string name="height_info">height_info</string>
+    <string name="mass_info">mass_info</string>
+    <string name="your_result">Your result</string>
+    <string name="your_height">Your height</string>
+    <string name="your_mass">Your mass</string>
+    <string name="your_bmi">Your BMI</string>
 </resources>

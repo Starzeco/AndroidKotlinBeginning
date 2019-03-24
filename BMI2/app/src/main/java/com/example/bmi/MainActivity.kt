@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
 
         var term=getString(R.string.wrong_data)
+        var result = 0.0
 
         countButton.isEnabled=false
         HeightInput.addTextChangedListener(object : TextWatcher {
@@ -54,7 +55,6 @@ class MainActivity : AppCompatActivity() {
 
 
         countButton.setOnClickListener {
-            var result:Double
             try{
                 bmi?.apply {
                     changeHeight(HeightInput.text.toString().toInt())
@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 result = bmi?.countBmi() ?: 0.0
             }catch(e: IllegalArgumentException){
-                result = 0.0
                 if(bmi is BmiForKgCm){
                     if(HeightInput.text.toString().toInt() !in 100..200){
                         HeightInput.error = getString(R.string.height_restriction)
@@ -119,8 +118,11 @@ class MainActivity : AppCompatActivity() {
 
         }
         switch_activity.setOnClickListener{
-            //val aboutIntent =Intent(this, About::class.java)
-            //startActivity(aboutIntent)
+            val infoIntent =Intent(this, InfoBMI::class.java)
+            infoIntent.putExtra(getString(R.string.result_info), "%.2f".format(result))
+            infoIntent.putExtra(getString(R.string.height_info), HeightInput.text.toString())
+            infoIntent.putExtra(getString(R.string.mass_info), MassInput.text.toString())
+            startActivity(infoIntent)
         }
 
     }
@@ -162,11 +164,25 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         if(id == R.id.change_id){
-            bmi=BmiForImperial(0,0)
-            mass.text = getString(R.string.mass_lb)
-            textView2.text = getString(R.string.height_in)
-            HeightInput.setText("")
-            MassInput.setText("")
+            if(bmi is BmiForKgCm){
+                bmi=BmiForImperial(0,0)
+                mass.text = getString(R.string.mass_lb)
+                textView2.text = getString(R.string.height_in)
+                HeightInput.setText("")
+                MassInput.setText("")
+                HeightInput.hint = getString(R.string.provide_height_in)
+                MassInput.hint = getString(R.string.provide_mass_lb)
+            }else {
+                if (bmi is BmiForImperial) {
+                    bmi = BmiForKgCm(0, 0)
+                    mass.text = getString(R.string.mass)
+                    textView2.text = getString(R.string.height)
+                    HeightInput.setText("")
+                    MassInput.setText("")
+                    HeightInput.hint = getString(R.string.provide_height)
+                    MassInput.hint = getString(R.string.provide_mass)
+                }
+            }
             return true
         }
         if(id == R.id.history_id){

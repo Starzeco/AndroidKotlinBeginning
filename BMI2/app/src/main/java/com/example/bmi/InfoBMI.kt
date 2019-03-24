@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_info_bmi.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.Double
 
 class InfoBMI : AppCompatActivity() {
 

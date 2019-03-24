@@ -1,6 +1,8 @@
 package com.example.bmi
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +13,8 @@ import android.view.MenuItem
 import com.example.bmi.logic.Bmi
 import com.example.bmi.logic.BmiForImperial
 import com.example.bmi.logic.BmiForKgCm
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Double.POSITIVE_INFINITY
 import kotlin.IllegalArgumentException
@@ -21,14 +25,30 @@ class MainActivity : AppCompatActivity() {
     val heightList = ArrayList<String>()
     val massList = ArrayList<String>()
     val bmiList = ArrayList<String>()
+    val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val preferences = Preferences(this)
 
         var term=getString(R.string.wrong_data)
         var result = 0.0
+        val type = object: TypeToken<ArrayList<String>>() {}.type
+        val temp_height_list = gson.fromJson<ArrayList<String>>(preferences.getHeightList(), type)
+        val temp_mass_list = gson.fromJson<ArrayList<String>>(preferences.getMassList(), type)
+        val temp_bmi_list = gson.fromJson<ArrayList<String>>(preferences.getBmiList(), type)
+        if(temp_bmi_list != null){
+            val size = temp_bmi_list.size -1
+
+            for(i in 0..size){
+                heightList.add(temp_height_list[i])
+                massList.add(temp_mass_list[i])
+                bmiList.add(temp_bmi_list[i])
+            }
+        }
+
 
         countButton.isEnabled=false
         HeightInput.addTextChangedListener(object : TextWatcher {
@@ -138,6 +158,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(infoIntent)
         }
 
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -175,6 +196,15 @@ class MainActivity : AppCompatActivity() {
             outState.putStringArrayList(getString(R.string.mass_list), massList)
             outState.putStringArrayList(getString(R.string.bmi_list), bmiList)
         }
+        val preferences = Preferences(this)
+        val Height_json = gson.toJson(heightList)
+        val Mass_json = gson.toJson(massList)
+        val Bmi_json = gson.toJson(bmiList)
+        preferences.setHeightList(Height_json)
+        preferences.setMassList(Mass_json)
+        preferences.setBmiList(Bmi_json)
+
+
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean{
         val inflater: MenuInflater = menuInflater

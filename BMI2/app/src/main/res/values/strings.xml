@@ -41,8 +41,8 @@
     <string name="height_list">height_list</string>
     <string name="mass_list">mass_list</string>
     <string name="bmi_list">bmi_list</string>
-    <string name="cm">cm</string>
-    <string name="kg">kg</string>
+    <string name="cm"> cm</string>
+    <string name="kg"> kg</string>
     <string name="in_unit">in</string>
     <string name="lb">lb</string>
     <string name="just_height">Height</string>

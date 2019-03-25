@@ -7,6 +7,7 @@ class Preferences(context: Context) {
     val PREFERENCE_HEIGHT = "Height_List"
     val PREFERENCE_MASS = "Mass_Preference"
     val PREFERENCE_BMI = "Bmi_Preference"
+    val PREFERENCE_DATE = "Date_Preference"
 
     val preferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
@@ -15,6 +16,8 @@ class Preferences(context: Context) {
     fun getMassList():String = preferences.getString(PREFERENCE_MASS, "")
 
     fun getBmiList():String = preferences.getString(PREFERENCE_BMI, "")
+
+    fun getDateList(): String = preferences.getString(PREFERENCE_DATE, "")
 
     fun setHeightList(list: String){
         val editor = preferences.edit()
@@ -29,6 +32,11 @@ class Preferences(context: Context) {
     fun setBmiList(list:String){
         val editor = preferences.edit()
         editor.putString(PREFERENCE_BMI, list)
+        editor.apply()
+    }
+    fun setDateList(list:String){
+        val editor = preferences.edit()
+        editor.putString(PREFERENCE_DATE, list)
         editor.apply()
     }
 }

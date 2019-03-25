@@ -14,8 +14,9 @@ class History : AppCompatActivity() {
         val heightList = intent.getStringArrayListExtra(getString(R.string.height_list))
         val massList = intent.getStringArrayListExtra(getString(R.string.mass_list))
         val bmiList = intent.getStringArrayListExtra(getString(R.string.bmi_list))
+        val dateList = intent.getStringArrayListExtra(getString(R.string.date_list))
 
         recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.adapter = CustomAdapter(heightList, massList, bmiList)
+        recycler_view.adapter = CustomAdapter(heightList, massList, bmiList, dateList)
     }
 }

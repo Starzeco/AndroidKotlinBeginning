@@ -79,4 +79,25 @@
         android:text="@string/bmi"
         app:layout_constraintBottom_toTopOf="@+id/bmi_row_id"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/date_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bmi_row_id"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/date_row_id"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:contentDescription="@string/date_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/date_row" />
 </androidx.constraintlayout.widget.ConstraintLayout>

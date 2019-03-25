@@ -25,3 +25,5 @@ i
 ,app/src/main/java/com/example/bmi/History.kt,c/c/cc47edc45dc8cf95d01bd1abc38bd54de6537c27
 b
 2app/src/main/java/com/example/bmi/CustomAdapter.kt,a/c/ac47924c4252c9626031d11a30c66eb48535ad7a
+`
+0app/src/main/java/com/example/bmi/Preferences.kt,9/e/9e27465dbdbed34c3b3bac8b7a3479919c76cf4d

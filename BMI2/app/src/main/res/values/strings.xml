@@ -47,4 +47,7 @@
     <string name="lb">lb</string>
     <string name="just_height">Height</string>
     <string name="just_mass">Mass</string>
+    <string name="date_list">date_list</string>
+    <string name="date">Date: </string>
+    <string name="date_id">Date</string>
 </resources>

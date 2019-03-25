@@ -1,8 +1,6 @@
 package com.example.bmi
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -17,7 +15,11 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Double.POSITIVE_INFINITY
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 import kotlin.IllegalArgumentException
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,11 +27,14 @@ class MainActivity : AppCompatActivity() {
     val heightList = ArrayList<String>()
     val massList = ArrayList<String>()
     val bmiList = ArrayList<String>()
+    val dateList = ArrayList<String>()
     val gson = Gson()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val simpleDate = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
 
         val preferences = Preferences(this)
 
@@ -39,13 +44,15 @@ class MainActivity : AppCompatActivity() {
         val temp_height_list = gson.fromJson<ArrayList<String>>(preferences.getHeightList(), type)
         val temp_mass_list = gson.fromJson<ArrayList<String>>(preferences.getMassList(), type)
         val temp_bmi_list = gson.fromJson<ArrayList<String>>(preferences.getBmiList(), type)
+        val temp_date_list = gson.fromJson<ArrayList<String>>(preferences.getDateList(), type)
         if(temp_bmi_list != null){
             val size = temp_bmi_list.size -1
 
             for(i in 0..size){
-                heightList.add(temp_height_list[i])
-                massList.add(temp_mass_list[i])
-                bmiList.add(temp_bmi_list[i])
+                heightList.add(0,temp_height_list[i])
+                massList.add(0,temp_mass_list[i])
+                bmiList.add(0,temp_bmi_list[i])
+                dateList.add(0,temp_date_list[i])
             }
         }
 
@@ -88,54 +95,61 @@ class MainActivity : AppCompatActivity() {
                 }
                 result = bmi?.countBmi() ?: 0.0
                 if(bmi is BmiForKgCm){
-                    heightList.add(HeightInput.text.toString()+getString(R.string.cm))
-                    massList.add(MassInput.text.toString()+getString(R.string.kg))
+                    heightList.add(0,HeightInput.text.toString()+getString(R.string.cm))
+                    massList.add(0,MassInput.text.toString()+getString(R.string.kg))
                 }else{
-                    heightList.add(HeightInput.text.toString()+getString(R.string.in_unit))
-                    massList.add(MassInput.text.toString()+ getString(R.string.lb))
+                    heightList.add(0,HeightInput.text.toString()+getString(R.string.in_unit))
+                    massList.add(0,MassInput.text.toString()+ getString(R.string.lb))
                 }
-                bmiList.add("%.2f".format(result))
+                bmiList.add(0,"%.2f".format(result))
+                dateList.add(0,simpleDate.format(Date()))
             }catch(e: IllegalArgumentException){
-                if(bmi is BmiForKgCm){
-                    if(HeightInput.text.toString().toInt() !in 100..200){
-                        HeightInput.error = getString(R.string.height_restriction)
-                        score.text = ""
-                        scoreText.text = getString(R.string.wrong_data)
+                try {
+                    if (bmi is BmiForKgCm) {
+                        if (HeightInput.text.toString().toInt() !in 100..200) {
+                            HeightInput.error = getString(R.string.height_restriction)
+                            score.text = ""
+                            scoreText.text = getString(R.string.wrong_data)
+                        }
+                        if (MassInput.text.toString().toInt() !in 20..150) {
+                            MassInput.error = getString(R.string.mass_restriction)
+                            score.text = ""
+                            scoreText.text = getString(R.string.wrong_data)
+                        }
                     }
-                    if(MassInput.text.toString().toInt() !in 20..150){
-                        MassInput.error = getString(R.string.mass_restriction)
-                        score.text= ""
-                        scoreText.text = getString(R.string.wrong_data)
+                    if (bmi is BmiForImperial) {
+                        if (HeightInput.text.toString().toInt() !in 40..80) {
+                            HeightInput.error = getString(R.string.height_restriction_imp)
+                            score.text = ""
+                            scoreText.text = getString(R.string.wrong_data)
+                        }
+                        if (MassInput.text.toString().toInt() !in 40..300) {
+                            MassInput.error = getString(R.string.mass_restriction_imp)
+                            score.text = ""
+                            scoreText.text = getString(R.string.wrong_data)
+                        }
                     }
-                }
-                if(bmi is BmiForImperial){
-                    if(HeightInput.text.toString().toInt() !in 40..80){
-                        HeightInput.error = getString(R.string.height_restriction_imp)
-                        score.text = ""
-                        scoreText.text = getString(R.string.wrong_data)
-                    }
-                    if(MassInput.text.toString().toInt() !in 40..300){
-                        MassInput.error = getString(R.string.mass_restriction_imp)
-                        score.text= ""
-                        scoreText.text = getString(R.string.wrong_data)
-                    }
+                }catch(ex: NumberFormatException){
+                    scoreText.text = getString(R.string.wrong_data)
+                    MassInput.setText("")
+                    HeightInput.setText("")
                 }
 
             }
             when(result){
-                in 0.1..18.4 -> {
+                in 0.1..18.49 -> {
                     term=getString(R.string.underweight)
                     score.setTextColor(resources.getColor(R.color.grynszpan))
                 }
-                in 18.5..24.9 -> {
+                in 18.5..24.99 -> {
                     term=getString(R.string.normal_weight)
                     score.setTextColor(resources.getColor(R.color.colorPrimary))
                 }
-                in 25.0..29.9 -> {
+                in 25.0..29.99 -> {
                     term=getString(R.string.over_weight)
                     score.setTextColor(resources.getColor(R.color.pompeianRose))
                 }
-                in 30.0..34.9 -> {
+                in 30.0..34.99 -> {
                     term=getString(R.string.obese_weight)
                     score.setTextColor(resources.getColor(R.color.LapisLazuli))
                 }
@@ -172,11 +186,13 @@ class MainActivity : AppCompatActivity() {
             val temp_heigtList = savedInstanceState.getStringArrayList(getString(R.string.height_list))
             val temp_massList = savedInstanceState.getStringArrayList(getString(R.string.mass_list))
             val temp_bmiList = savedInstanceState.getStringArrayList(getString(R.string.bmi_list))
+            val temp_dateList = savedInstanceState.getStringArrayList(getString(R.string.date_list))
             val size = temp_bmiList.size-1
             for (i in 0..size){
-                bmiList.add(temp_bmiList[i])
-                heightList.add(temp_heigtList[i])
-                massList.add(temp_massList[i])
+                bmiList.add(0,temp_bmiList[i])
+                heightList.add(0,temp_heigtList[i])
+                massList.add(0,temp_massList[i])
+                dateList.add(0,temp_dateList[i])
             }
         }
 
@@ -195,11 +211,14 @@ class MainActivity : AppCompatActivity() {
             outState.putStringArrayList(getString(R.string.height_list), heightList)
             outState.putStringArrayList(getString(R.string.mass_list), massList)
             outState.putStringArrayList(getString(R.string.bmi_list), bmiList)
+            outState.putStringArrayList(getString(R.string.date_list), dateList)
         }
         val preferences = Preferences(this)
         val Height_json = gson.toJson(heightList)
         val Mass_json = gson.toJson(massList)
         val Bmi_json = gson.toJson(bmiList)
+        val Date_json = gson.toJson(dateList)
+        preferences.setDateList(Date_json)
         preferences.setHeightList(Height_json)
         preferences.setMassList(Mass_json)
         preferences.setBmiList(Bmi_json)
@@ -247,6 +266,7 @@ class MainActivity : AppCompatActivity() {
             historyIntent.putStringArrayListExtra(getString(R.string.height_list), heightList)
             historyIntent.putStringArrayListExtra(getString(R.string.mass_list), massList)
             historyIntent.putStringArrayListExtra(getString(R.string.bmi_list), bmiList)
+            historyIntent.putStringArrayListExtra(getString(R.string.date_list), dateList)
             startActivity(historyIntent)
             return true
         }

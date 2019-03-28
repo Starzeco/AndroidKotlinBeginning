@@ -1,14 +1,14 @@
 
-pkotlin:S117/"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ƒÖâØ8á«‘°›-
-qkotlin:S117Â"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(®Íâ„8¦§ö¯›-
-qkotlin:S117á"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ÄÞÁ·8¦§ö¯›-
-vkotlin:S117Ä"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(©ˆµöüÿÿÿÿ8Ûµœ°›-
-vkotlin:S3776#"RRefactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.(¶Á»¬þÿÿÿÿ8¦§ö¯›-
-qkotlin:S117â"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(¹Õ‡¸8¦§ö¯›-
-ukotlin:S117-"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(–ÕþÍÿÿÿÿÿ8¦§ö¯›-
-ukotlin:S117,"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(Íôéùúÿÿÿÿ8¦§ö¯›-
-qkotlin:S117Á"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ìÈÝˆ8¦§ö¯›-
-qkotlin:S117ã"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ÅŽ Æ8ûœ¹¯›-
-qkotlin:S117ä"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(í¸ŒÂ8ûÐ¢°›-
-vkotlin:S117Ã"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(äíŽðþÿÿÿÿ8ûœ¹¯›-
-ukotlin:S117."RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(©š·’þÿÿÿÿ8àÚÈ…›-
+jkotlin:S117‚"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ÄÞÁ·
+jkotlin:S117…"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(í¸ŒÂ
+okotlin:S117Ü"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(Ûñ‚Ôúÿÿÿÿ
+jkotlin:S117ƒ"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(¹Õ‡¸
+jkotlin:S117„"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ÅŽ Æ
+okotlin:S117ß"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ˆë¨Úüÿÿÿÿ
+jkotlin:S117Ý"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ƒˆ¬‰
+jkotlin:S117Þ"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ÎÔÓÀ
+okotlin:S37765"RRefactor this method to reduce its Cognitive Complexity from 42 to the 15 allowed.(¶Á»¬þÿÿÿÿ
+ukotlin:S117>"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(Íôéùúÿÿÿÿ8€µýªœ-
+ukotlin:S117?"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(–ÕþÍÿÿÿÿÿ8€µýªœ-
+ukotlin:S117@"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(©š·’þÿÿÿÿ8€µýªœ-
+pkotlin:S117A"RRename this local variable to match the regular expression "^[_a-z][a-zA-Z0-9]*$".(ƒÖâØ8€µýªœ-

@@ -17,7 +17,6 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Double.POSITIVE_INFINITY
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 import kotlin.IllegalArgumentException
 import kotlin.collections.ArrayList
@@ -31,6 +30,24 @@ class MainActivity : AppCompatActivity() {
     val dateList = ArrayList<String>()
     val gson = Gson()
 
+    companion object {
+        const val MASS_TEXT = "mass_text"
+        const val HEIGHT_TEXT = "height_text"
+        const val MASS_HINT = "mass_hint"
+        const val HEIGHT_HINT= "height_hint"
+        const val HEIGHT_LIST = "height_list"
+        const val MASS_LIST = "mass_list"
+        const val BMI_LIST = "bmi_list"
+        const val DATE_LIST = "date_list"
+        const val RESULT_INFO = "result_info"
+        const val MASS_INFO = "mass_info"
+        const val HEIGHT_INFO = "height_info"
+        const val MASS_KG = "Mass [kg]"
+        const val HEIGHT_CM = "Height [cm]"
+        const val SCORE = "Score"
+        const val SCORE_TEXT = "ScoreText"
+        const val COLOR = "Color"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +71,9 @@ class MainActivity : AppCompatActivity() {
                 bmiList.add(temp_bmi_list[i])
                 dateList.add(temp_date_list[i])
             }
+        }
+        if(textView2.text.toString() == getString(R.string.height_in)){
+            bmi = BmiForImperial(0,0)
         }
 
 
@@ -173,9 +193,9 @@ class MainActivity : AppCompatActivity() {
         }
         switch_activity.setOnClickListener{
             val infoIntent =Intent(this, InfoBMI::class.java)
-            infoIntent.putExtra(getString(R.string.result_info), "%.2f".format(result))
-            infoIntent.putExtra(getString(R.string.height_info), HeightInput.text.toString())
-            infoIntent.putExtra(getString(R.string.mass_info), MassInput.text.toString())
+            infoIntent.putExtra(RESULT_INFO, "%.2f".format(result))
+            infoIntent.putExtra(HEIGHT_INFO, HeightInput.text.toString())
+            infoIntent.putExtra(MASS_INFO, MassInput.text.toString())
             startActivity(infoIntent)
         }
 
@@ -185,22 +205,16 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         if(savedInstanceState != null){
-            MassInput.setText(savedInstanceState.getString(getString(R.string.mass)))
-            HeightInput.setText(savedInstanceState.getString(getString(R.string.height)))
-            score.text = savedInstanceState.getString(getString(R.string.score))
-            scoreText.text = savedInstanceState.getString(getString(R.string.score_text))
-            score.setTextColor(savedInstanceState.getInt(getString(R.string.color)))
-            val temp_heigtList = savedInstanceState.getStringArrayList(getString(R.string.height_list))
-            val temp_massList = savedInstanceState.getStringArrayList(getString(R.string.mass_list))
-            val temp_bmiList = savedInstanceState.getStringArrayList(getString(R.string.bmi_list))
-            val temp_dateList = savedInstanceState.getStringArrayList(getString(R.string.date_list))
-            val size = temp_bmiList.size-1
-            for (i in 0..size){
-                bmiList.add(temp_bmiList[i])
-                heightList.add(temp_heigtList[i])
-                massList.add(temp_massList[i])
-                dateList.add(temp_dateList[i])
-            }
+            MassInput.setText(savedInstanceState.getString(MASS_KG))
+            HeightInput.setText(savedInstanceState.getString(HEIGHT_CM))
+            score.text = savedInstanceState.getString(SCORE)
+            scoreText.text = savedInstanceState.getString(SCORE_TEXT)
+            score.setTextColor(savedInstanceState.getInt(COLOR))
+
+            mass.text = savedInstanceState.getString(MASS_TEXT)
+            textView2.text = savedInstanceState.getString(HEIGHT_TEXT)
+            MassInput.hint = savedInstanceState.getString(MASS_HINT)
+            HeightInput.hint = savedInstanceState.getString(HEIGHT_HINT)
 
         }
 
@@ -211,15 +225,23 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         if(outState != null){
-            outState.putString(getString(R.string.mass), MassInput.text.toString())
-            outState.putString(getString(R.string.height), HeightInput.text.toString())
-            outState.putString(getString(R.string.score), score.text.toString())
-            outState.putString(getString(R.string.score_text), scoreText.text.toString())
-            outState.putInt(getString(R.string.color), score.currentTextColor)
-            outState.putStringArrayList(getString(R.string.height_list), heightList)
-            outState.putStringArrayList(getString(R.string.mass_list), massList)
-            outState.putStringArrayList(getString(R.string.bmi_list), bmiList)
-            outState.putStringArrayList(getString(R.string.date_list), dateList)
+            outState.run {
+                putString(MASS_KG, MassInput.text.toString())
+                putString(HEIGHT_CM, HeightInput.text.toString())
+                putString(SCORE, score.text.toString())
+                putString(SCORE_TEXT, scoreText.text.toString())
+                putInt(COLOR, score.currentTextColor)
+
+                putStringArrayList(HEIGHT_LIST, heightList)
+                putStringArrayList(MASS_LIST, massList)
+                putStringArrayList(BMI_LIST, bmiList)
+                putStringArrayList(DATE_LIST, dateList)
+
+                putString(MASS_TEXT, mass.text.toString())
+                putString(HEIGHT_TEXT, textView2.text.toString())
+                putString(MASS_HINT, MassInput.hint.toString())
+                putString(HEIGHT_HINT, HeightInput.hint.toString())
+            }
         }
         val preferences = Preferences(this)
         val Height_json = gson.toJson(heightList)
@@ -252,8 +274,6 @@ class MainActivity : AppCompatActivity() {
                 bmi=BmiForImperial(0,0)
                 mass.text = getString(R.string.mass_lb)
                 textView2.text = getString(R.string.height_in)
-                HeightInput.setText("")
-                MassInput.setText("")
                 HeightInput.hint = getString(R.string.provide_height_in)
                 MassInput.hint = getString(R.string.provide_mass_lb)
             }else {
@@ -261,20 +281,22 @@ class MainActivity : AppCompatActivity() {
                     bmi = BmiForKgCm(0, 0)
                     mass.text = getString(R.string.mass)
                     textView2.text = getString(R.string.height)
-                    HeightInput.setText("")
-                    MassInput.setText("")
                     HeightInput.hint = getString(R.string.provide_height)
                     MassInput.hint = getString(R.string.provide_mass)
                 }
             }
+            HeightInput.setText("")
+            MassInput.setText("")
+            score.text=""
+            scoreText.text=""
             return true
         }
         if(id == R.id.history_id){
             val historyIntent = Intent(this, History::class.java)
-            historyIntent.putStringArrayListExtra(getString(R.string.height_list), heightList)
-            historyIntent.putStringArrayListExtra(getString(R.string.mass_list), massList)
-            historyIntent.putStringArrayListExtra(getString(R.string.bmi_list), bmiList)
-            historyIntent.putStringArrayListExtra(getString(R.string.date_list), dateList)
+            historyIntent.putStringArrayListExtra(HEIGHT_LIST, heightList)
+            historyIntent.putStringArrayListExtra(MASS_LIST, massList)
+            historyIntent.putStringArrayListExtra(BMI_LIST, bmiList)
+            historyIntent.putStringArrayListExtra(DATE_LIST, dateList)
             startActivity(historyIntent)
             return true
         }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/about_left_padding"
     android:paddingRight="@dimen/about_rigth_padding"
@@ -26,4 +26,7 @@
         android:layout_height="@dimen/danger_image_height"
         android:contentDescription="@string/student"
         app:srcCompat="@drawable/made_by_student" />
+    <Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/Switcher" android:text="@string/switcho"/>
 </LinearLayout>

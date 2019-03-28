@@ -1,102 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="110dp">
 
 
     <TextView
-        android:id="@+id/bmi_row_id"
-        android:layout_width="@dimen/bmi_text_row_width"
-        android:layout_height="@dimen/bmi_text_height"
-        android:layout_marginStart="@dimen/bmi_text_start"
-        android:layout_marginLeft="@dimen/bmi_text_left"
-        android:layout_marginBottom="@dimen/bmi_text_bottom"
-        android:contentDescription="@string/bmi"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+            android:id="@+id/bmi_row_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/bmi"
+            android:textSize="20sp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4" android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView6"/>
     <TextView
-        android:id="@+id/height_row_id"
-        android:layout_width="@dimen/height_row_width"
-        android:layout_height="@dimen/height_row_height"
-        android:layout_marginStart="@dimen/height_row_start"
-        android:layout_marginLeft="@dimen/height_row_left"
-        android:contentDescription="@string/height"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bmi_row_id" />
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bmi"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline4" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/mass_display_row_id"
-        android:layout_width="@dimen/mass_row_width"
-        android:layout_height="@dimen/mass_row_heigth"
-        android:layout_marginStart="@dimen/mass_row_start"
-        android:layout_marginLeft="@dimen/mass_row_left"
-        android:layout_marginEnd="@dimen/mass_row_end"
-        android:layout_marginRight="@dimen/mass_row_right"
-        android:contentDescription="@string/mass"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/height_row_id" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="@dimen/height_row_text_width"
-        android:layout_height="@dimen/height_row_text_heigth"
-        android:layout_marginStart="@dimen/heigth_row_text_start"
-        android:layout_marginLeft="@dimen/heigth_row_text_left"
-        android:layout_marginBottom="@dimen/heigth_row_text_bottom"
-        android:text="@string/just_height"
-        app:layout_constraintBottom_toTopOf="@+id/height_row_id"
-        app:layout_constraintStart_toEndOf="@+id/bmi_row_id" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="@dimen/mass_row_text_width"
-        android:layout_height="@dimen/mass_row_text_heigth"
-        android:layout_marginStart="@dimen/mass_row_text_start"
-        android:layout_marginLeft="@dimen/mass_row_text_left"
-        android:layout_marginEnd="@dimen/mass_row_text_end"
-        android:layout_marginRight="@dimen/mass_row_text_right"
-        android:layout_marginBottom="@dimen/mass_row_text_bottom"
-        android:text="@string/just_mass"
-        app:layout_constraintBottom_toTopOf="@+id/mass_display_row_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/bmi_text_row_start"
-        android:layout_marginLeft="@dimen/bmi_text_row_left"
-        android:layout_marginBottom="@dimen/bmi_text_row_bottom"
-        android:text="@string/bmi"
-        app:layout_constraintBottom_toTopOf="@+id/bmi_row_id"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/date_row"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/date_row_text_top"
-        android:text="@string/date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bmi_row_id"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/date_row_id"
-        android:layout_width="@dimen/date_row_width"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/date_row_start"
-        android:layout_marginLeft="@dimen/date_row_left"
-        android:contentDescription="@string/date_id"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/date_row" />
+        <TextView
+                android:id="@+id/height_row_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/height"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.518"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/just_height"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:id="@+id/date_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"/>
+        <TextView
+                android:id="@+id/date_row_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/date_id"
+                app:layout_constraintStart_toEndOf="@+id/date_row"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/mass_display_row_id" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/just_mass"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
+        <TextView
+                android:id="@+id/mass_display_row_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/mass"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView5"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/height_row_id"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                android:id="@+id/guideline4"
+                                                android:orientation="vertical"
+                                                app:layout_constraintGuide_percent="0.4"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,6 +45,7 @@
     <string name="kg"> kg</string>
     <string name="in_unit">in</string>
     <string name="lb">lb</string>
+    <string name="switcho">Switch for fun</string>
     <string name="just_height">Height</string>
     <string name="just_mass">Mass</string>
     <string name="date_list">date_list</string>

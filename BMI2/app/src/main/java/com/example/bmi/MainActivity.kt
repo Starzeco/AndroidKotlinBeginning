@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val simpleDate = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-        var term=getString(R.string.wrong_data)
         var result = 0.0
         countButton.isEnabled=false
         readPreferences()
@@ -92,13 +91,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 result = bmi?.countBmi() ?: 0.0
-                if (bmi is BmiForKgCm) {
-                    heightList.add(0, HeightInput.text.toString() + getString(R.string.cm))
-                    massList.add(0, MassInput.text.toString() + getString(R.string.kg))
-                } else {
-                    heightList.add(0, HeightInput.text.toString() + getString(R.string.in_unit))
-                    massList.add(0, MassInput.text.toString() + getString(R.string.lb))
-                }
+                addWithImperialOrNormal()
                 bmiList.add(0, "%.2f".format(result))
                 dateList.add(0, simpleDate.format(Date()))
                 ifMoreThan10DeleteLast()
@@ -114,31 +107,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
-            when(result){
-                in 0.1..18.49 -> {
-                    term=getString(R.string.underweight)
-                    score.setTextColor(ContextCompat.getColor(this,R.color.grynszpan))
-                }
-                in 18.5..24.99 -> {
-                    term=getString(R.string.normal_weight)
-                    score.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary))
-                }
-                in 25.0..29.99 -> {
-                    term=getString(R.string.over_weight)
-                    score.setTextColor(ContextCompat.getColor(this,R.color.pompeianRose))
-                }
-                in 30.0..34.99 -> {
-                    term=getString(R.string.obese_weight)
-                    score.setTextColor(ContextCompat.getColor(this,R.color.LapisLazuli))
-                }
-                in 35.0..POSITIVE_INFINITY -> {
-                    term=getString(R.string.extremly_obese_weight)
-                    score.setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
-                }
-            }
+            scoreText.text = checkResultAndSetTextColor(result)
             if(result != 0.0){
                 score.text = "%.2f".format(result)
-                scoreText.text=term
             }
 
         }
@@ -302,6 +273,42 @@ class MainActivity : AppCompatActivity() {
                 scoreText.text = getString(R.string.wrong_data)
             }
         }
+    }
+    private fun addWithImperialOrNormal(){
+        if (bmi is BmiForKgCm) {
+            heightList.add(0, HeightInput.text.toString() + getString(R.string.cm))
+            massList.add(0, MassInput.text.toString() + getString(R.string.kg))
+        } else {
+            heightList.add(0, HeightInput.text.toString() + getString(R.string.in_unit))
+            massList.add(0, MassInput.text.toString() + getString(R.string.lb))
+        }
+    }
+    private fun checkResultAndSetTextColor(result: Double): String{
+        val temp: String
+        when(result){
+            in 0.1..18.49 -> {
+                temp=getString(R.string.underweight)
+                score.setTextColor(ContextCompat.getColor(this,R.color.grynszpan))
+            }
+            in 18.5..24.99 -> {
+                temp=getString(R.string.normal_weight)
+                score.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary))
+            }
+            in 25.0..29.99 -> {
+                temp=getString(R.string.over_weight)
+                score.setTextColor(ContextCompat.getColor(this,R.color.pompeianRose))
+            }
+            in 30.0..34.99 -> {
+                temp=getString(R.string.obese_weight)
+                score.setTextColor(ContextCompat.getColor(this,R.color.LapisLazuli))
+            }
+            in 35.0..POSITIVE_INFINITY -> {
+                temp=getString(R.string.extremly_obese_weight)
+                score.setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
+            }
+            else -> temp = getString(R.string.wrong_data)
+        }
+        return temp
     }
 
 }

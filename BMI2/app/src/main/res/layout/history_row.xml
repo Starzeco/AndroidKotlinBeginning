@@ -3,18 +3,24 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="110dp"
+                                                   android:layout_height="@dimen/history_row_height"
                                                     >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:background="#00d2ff">
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/constrain_frame_left"
+            android:layout_marginStart="@dimen/constrain_frame_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/constrain_frame_end"
+            android:layout_marginRight="@dimen/constrain_frame_right"
+            android:layout_marginTop="@dimen/constrain_frame_top"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="@dimen/constrain_frame_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/bright_blue">
 
         <TextView
                 android:id="@+id/textView6"
@@ -23,9 +29,12 @@
                 android:text="@string/bmi"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline4" android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp" android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/bmi_row_left"
+                android:layout_marginStart="@dimen/bmi_row_start"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                android:layout_marginEnd="@dimen/bmi_row_end"
+                android:layout_marginRight="@dimen/bmi_row_right"
+                android:layout_marginTop="@dimen/bmi_row_top"
                 app:layout_constraintTop_toTopOf="parent"/>
         <TextView
                 android:id="@+id/bmi_row_id"
@@ -33,28 +42,38 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/bmi"
                 android:textSize="30sp"
-                android:textColor="#0009ff"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline4" android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView6"/>
-        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:id="@+id/guideline4"
-                                                    android:orientation="vertical"
-                                                    app:layout_constraintGuide_percent="0.4"/>
+                android:textColor="@color/dark_blue"
+                android:layout_marginBottom="@dimen/bmi_text_row_bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="@dimen/bmi_text_row_start"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="@dimen/bmi_text_row_left"
+                android:layout_marginEnd="@dimen/bmi_text_row_end"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                android:layout_marginRight="@dimen/bmi_text_row_right"
+                android:layout_marginTop="@dimen/bmi_text_row_top"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"/>
+        <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline4"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.4"/>
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline4" android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp" android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                android:layout_marginLeft="@dimen/constrain_nested_frame_left"
+                android:layout_marginStart="@dimen/constrain_nested_frame_start"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/constrain_nested_frame_end"
+                android:layout_marginRight="@dimen/constrain_nested_frame_right"
+                android:layout_marginTop="@dimen/constrain_nested_frame_top"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@drawable/back" android:id="@+id/constraintLayout">
+                android:layout_marginBottom="@dimen/constrain_nested_frame_bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/back"
+                android:id="@+id/constraintLayout">
 
             <TextView
                     android:id="@+id/height_row_id"
@@ -63,10 +82,13 @@
                     android:contentDescription="@string/height"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/textView4"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="12dp" app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_marginLeft="@dimen/height_row_text_left"
+                    android:layout_marginStart="@dimen/height_row_text_start"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="@dimen/height_row_text_end"
+                    android:layout_marginRight="@dimen/height_row_text_right"
+                    android:layout_marginTop="@dimen/height_row_text_top"
+                    app:layout_constraintTop_toTopOf="parent"/>
             <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
@@ -74,7 +96,9 @@
                     android:text="@string/just_height"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="7dp"
+                    android:layout_marginLeft="@dimen/height_row_left"
+                    android:layout_marginStart="@dimen/height_row_start"
+                    android:layout_marginTop="@dimen/height_row_top"
                     app:layout_constraintTop_toTopOf="parent"/>
             <TextView
                     android:id="@+id/date_row"
@@ -83,7 +107,9 @@
                     android:text="@string/date"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="3dp"
+                    android:layout_marginLeft="@dimen/date_row_left"
+                    android:layout_marginStart="@dimen/date_row_start"
+                    android:layout_marginTop="@dimen/date_row_top"
                     app:layout_constraintTop_toBottomOf="@+id/textView5"/>
             <TextView
                     android:id="@+id/date_row_id"
@@ -92,19 +118,26 @@
                     android:contentDescription="@string/date_id"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/date_row"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/mass_display_row_id" android:layout_marginBottom="6dp"
-                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"/>
+                    android:layout_marginLeft="@dimen/date_text_row_left"
+                    android:layout_marginStart="@dimen/date_text_row_start"
+                    android:layout_marginTop="@dimen/date_text_row_top"
+                    app:layout_constraintTop_toBottomOf="@+id/mass_display_row_id"
+                    android:layout_marginBottom="@dimen/date_text_row_bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="@dimen/date_text_row_end"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginRight="@dimen/date_text_row_right"/>
             <TextView
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/just_mass"
                     android:textSize="14sp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
+                    android:layout_marginTop="@dimen/mass_row_top"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="@dimen/mass_row_left"
+                    android:layout_marginStart="@dimen/mass_row_start"/>
             <TextView
                     android:id="@+id/mass_display_row_id"
                     android:layout_width="wrap_content"
@@ -112,9 +145,13 @@
                     android:contentDescription="@string/mass"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/textView5"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/height_row_id" android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"/>
+                    android:layout_marginLeft="@dimen/mass_text_row_left"
+                    android:layout_marginStart="@dimen/mass_text_row_start"
+                    android:layout_marginTop="@dimen/mass_text_row_top"
+                    app:layout_constraintTop_toBottomOf="@+id/height_row_id"
+                    android:layout_marginEnd="@dimen/mass_text_row_end"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginRight="@dimen/mass_text_row_right"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

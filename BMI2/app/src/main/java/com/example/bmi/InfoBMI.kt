@@ -17,7 +17,9 @@ class InfoBMI : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_bmi)
+
         val bmiResult = intent.getStringExtra(RESULT_INFO)
+
         bmi_result_rl.text = bmiResult
         when(bmiResult.replace(',','.').toDouble()){
             in 0.1..18.49 -> {

@@ -52,57 +52,35 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val simpleDate = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-        val preferences = Preferences(this)
 
+        val simpleDate = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
         var term=getString(R.string.wrong_data)
         var result = 0.0
-        val type = object: TypeToken<ArrayList<String>>() {}.type
-        val temp_height_list = gson.fromJson<ArrayList<String>>(preferences.getHeightList(), type)
-        val temp_mass_list = gson.fromJson<ArrayList<String>>(preferences.getMassList(), type)
-        val temp_bmi_list = gson.fromJson<ArrayList<String>>(preferences.getBmiList(), type)
-        val temp_date_list = gson.fromJson<ArrayList<String>>(preferences.getDateList(), type)
-        if(temp_bmi_list != null){
-            val size = temp_bmi_list.size -1
+        countButton.isEnabled=false
+        readPreferences()
 
-            for(i in 0..size){
-                heightList.add(temp_height_list[i])
-                massList.add(temp_mass_list[i])
-                bmiList.add(temp_bmi_list[i])
-                dateList.add(temp_date_list[i])
-            }
-        }
+
         if(textView2.text.toString() == getString(R.string.height_in)){
             bmi = BmiForImperial(0,0)
         }
 
 
-        countButton.isEnabled=false
         HeightInput.addTextChangedListener(object : TextWatcher {
-
             override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 countButton.isEnabled= !s.isNullOrEmpty() && !MassInput.text.isNullOrEmpty()
             }
         })
+
         MassInput.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 countButton.isEnabled= !s.isNullOrEmpty() && !HeightInput.text.isNullOrEmpty()
             }
-
         })
 
 
@@ -123,39 +101,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 bmiList.add(0, "%.2f".format(result))
                 dateList.add(0, simpleDate.format(Date()))
-                if(bmiList.size==11){
-                    bmiList.removeAt(10)
-                    dateList.removeAt(10)
-                    heightList.removeAt(10)
-                    massList.removeAt(10)
-                }
+                ifMoreThan10DeleteLast()
 
             }catch(e: IllegalArgumentException){
                 try {
-                    if (bmi is BmiForKgCm) {
-                        if (HeightInput.text.toString().toInt() !in 100..200) {
-                            HeightInput.error = getString(R.string.height_restriction)
-                            score.text = ""
-                            scoreText.text = getString(R.string.wrong_data)
-                        }
-                        if (MassInput.text.toString().toInt() !in 20..150) {
-                            MassInput.error = getString(R.string.mass_restriction)
-                            score.text = ""
-                            scoreText.text = getString(R.string.wrong_data)
-                        }
-                    }
-                    if (bmi is BmiForImperial) {
-                        if (HeightInput.text.toString().toInt() !in 40..80) {
-                            HeightInput.error = getString(R.string.height_restriction_imp)
-                            score.text = ""
-                            scoreText.text = getString(R.string.wrong_data)
-                        }
-                        if (MassInput.text.toString().toInt() !in 40..300) {
-                            MassInput.error = getString(R.string.mass_restriction_imp)
-                            score.text = ""
-                            scoreText.text = getString(R.string.wrong_data)
-                        }
-                    }
+                    raiseErrorForHeight()
+                    raiseErrorForMass()
                 }catch(ex: NumberFormatException){
                     scoreText.text = getString(R.string.wrong_data)
                     MassInput.setText("")
@@ -219,9 +170,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
-
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         if(outState != null){
@@ -232,28 +180,13 @@ class MainActivity : AppCompatActivity() {
                 putString(SCORE_TEXT, scoreText.text.toString())
                 putInt(COLOR, score.currentTextColor)
 
-                putStringArrayList(HEIGHT_LIST, heightList)
-                putStringArrayList(MASS_LIST, massList)
-                putStringArrayList(BMI_LIST, bmiList)
-                putStringArrayList(DATE_LIST, dateList)
-
                 putString(MASS_TEXT, mass.text.toString())
                 putString(HEIGHT_TEXT, textView2.text.toString())
                 putString(MASS_HINT, MassInput.hint.toString())
                 putString(HEIGHT_HINT, HeightInput.hint.toString())
             }
         }
-        val preferences = Preferences(this)
-        val Height_json = gson.toJson(heightList)
-        val Mass_json = gson.toJson(massList)
-        val Bmi_json = gson.toJson(bmiList)
-        val Date_json = gson.toJson(dateList)
-        preferences.setDateList(Date_json)
-        preferences.setHeightList(Height_json)
-        preferences.setMassList(Mass_json)
-        preferences.setBmiList(Bmi_json)
-
-
+        savePreferences()
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean{
         val inflater: MenuInflater = menuInflater
@@ -302,6 +235,73 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+    private fun savePreferences(){
+        val preferences = Preferences(this)
+        val heightJson = gson.toJson(heightList)
+        val massJson = gson.toJson(massList)
+        val bmiJson = gson.toJson(bmiList)
+        val dateJson = gson.toJson(dateList)
+        preferences.setDateList(dateJson)
+        preferences.setHeightList(heightJson)
+        preferences.setMassList(massJson)
+        preferences.setBmiList(bmiJson)
+    }
+    private fun readPreferences(){
+        val preferences = Preferences(this)
+        val type = object: TypeToken<ArrayList<String>>() {}.type
+        val tempHeightList = gson.fromJson<ArrayList<String>>(preferences.getHeightList(), type)
+        val tempMassList = gson.fromJson<ArrayList<String>>(preferences.getMassList(), type)
+        val tempBmiList = gson.fromJson<ArrayList<String>>(preferences.getBmiList(), type)
+        val tempDateList = gson.fromJson<ArrayList<String>>(preferences.getDateList(), type)
+        if(tempBmiList != null){
+            val size = tempBmiList.size -1
+
+            for(i in 0..size){
+                heightList.add(tempHeightList[i])
+                massList.add(tempMassList[i])
+                bmiList.add(tempBmiList[i])
+                dateList.add(tempDateList[i])
+            }
+        }
+    }
+    private fun ifMoreThan10DeleteLast(){
+        if(bmiList.size==11){
+            bmiList.removeAt(10)
+            dateList.removeAt(10)
+            heightList.removeAt(10)
+            massList.removeAt(10)
+        }
+    }
+    private fun raiseErrorForMass(){
+        if(bmi is BmiForKgCm){
+            if (MassInput.text.toString().toInt() !in 20..150) {
+                MassInput.error = getString(R.string.mass_restriction)
+                score.text = ""
+                scoreText.text = getString(R.string.wrong_data)
+            }
+        }else{
+            if (MassInput.text.toString().toInt() !in 40..300) {
+                MassInput.error = getString(R.string.mass_restriction_imp)
+                score.text = ""
+                scoreText.text = getString(R.string.wrong_data)
+            }
+        }
+    }
+    private fun raiseErrorForHeight(){
+        if(bmi is BmiForKgCm){
+            if (HeightInput.text.toString().toInt() !in 100..200) {
+                HeightInput.error = getString(R.string.height_restriction)
+                score.text = ""
+                scoreText.text = getString(R.string.wrong_data)
+            }
+        }else{
+            if (HeightInput.text.toString().toInt() !in 40..80) {
+                HeightInput.error = getString(R.string.height_restriction_imp)
+                score.text = ""
+                scoreText.text = getString(R.string.wrong_data)
+            }
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.bmi
 
+import com.example.bmi.logic.BmiForImperial
 import com.example.bmi.logic.BmiForKgCm
 import org.junit.Test
 
@@ -20,4 +21,10 @@ class ExampleUnitTest {
         val bmi = BmiForKgCm(65, 170)
         assertEquals(22.491, bmi.countBmi(), 0.001)
     }
+    @Test
+    fun for_valid_data_count_bmi_lb_in(){
+        val bmi = BmiForImperial(50, 50)
+        assertEquals(14.06, bmi.countBmi(), 0.001)
+    }
+
 }

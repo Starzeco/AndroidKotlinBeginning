@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
 import com.example.bmi.logic.Bmi
 import com.example.bmi.logic.BmiForImperial
 import com.example.bmi.logic.BmiForKgCm
@@ -35,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val simpleDate = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-
         val preferences = Preferences(this)
 
         var term=getString(R.string.wrong_data)
@@ -49,10 +49,10 @@ class MainActivity : AppCompatActivity() {
             val size = temp_bmi_list.size -1
 
             for(i in 0..size){
-                heightList.add(0,temp_height_list[i])
-                massList.add(0,temp_mass_list[i])
-                bmiList.add(0,temp_bmi_list[i])
-                dateList.add(0,temp_date_list[i])
+                heightList.add(temp_height_list[i])
+                massList.add(temp_mass_list[i])
+                bmiList.add(temp_bmi_list[i])
+                dateList.add(temp_date_list[i])
             }
         }
 
@@ -94,15 +94,22 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 result = bmi?.countBmi() ?: 0.0
-                if(bmi is BmiForKgCm){
-                    heightList.add(0,HeightInput.text.toString()+getString(R.string.cm))
-                    massList.add(0,MassInput.text.toString()+getString(R.string.kg))
-                }else{
-                    heightList.add(0,HeightInput.text.toString()+getString(R.string.in_unit))
-                    massList.add(0,MassInput.text.toString()+ getString(R.string.lb))
+                if (bmi is BmiForKgCm) {
+                    heightList.add(0, HeightInput.text.toString() + getString(R.string.cm))
+                    massList.add(0, MassInput.text.toString() + getString(R.string.kg))
+                } else {
+                    heightList.add(0, HeightInput.text.toString() + getString(R.string.in_unit))
+                    massList.add(0, MassInput.text.toString() + getString(R.string.lb))
                 }
-                bmiList.add(0,"%.2f".format(result))
-                dateList.add(0,simpleDate.format(Date()))
+                bmiList.add(0, "%.2f".format(result))
+                dateList.add(0, simpleDate.format(Date()))
+                if(bmiList.size==11){
+                    bmiList.removeAt(10)
+                    dateList.removeAt(10)
+                    heightList.removeAt(10)
+                    massList.removeAt(10)
+                }
+
             }catch(e: IllegalArgumentException){
                 try {
                     if (bmi is BmiForKgCm) {
@@ -139,23 +146,23 @@ class MainActivity : AppCompatActivity() {
             when(result){
                 in 0.1..18.49 -> {
                     term=getString(R.string.underweight)
-                    score.setTextColor(resources.getColor(R.color.grynszpan))
+                    score.setTextColor(ContextCompat.getColor(this,R.color.grynszpan))
                 }
                 in 18.5..24.99 -> {
                     term=getString(R.string.normal_weight)
-                    score.setTextColor(resources.getColor(R.color.colorPrimary))
+                    score.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary))
                 }
                 in 25.0..29.99 -> {
                     term=getString(R.string.over_weight)
-                    score.setTextColor(resources.getColor(R.color.pompeianRose))
+                    score.setTextColor(ContextCompat.getColor(this,R.color.pompeianRose))
                 }
                 in 30.0..34.99 -> {
                     term=getString(R.string.obese_weight)
-                    score.setTextColor(resources.getColor(R.color.LapisLazuli))
+                    score.setTextColor(ContextCompat.getColor(this,R.color.LapisLazuli))
                 }
                 in 35.0..POSITIVE_INFINITY -> {
                     term=getString(R.string.extremly_obese_weight)
-                    score.setTextColor(resources.getColor(R.color.colorPrimaryDark))
+                    score.setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
                 }
             }
             if(result != 0.0){
@@ -189,11 +196,12 @@ class MainActivity : AppCompatActivity() {
             val temp_dateList = savedInstanceState.getStringArrayList(getString(R.string.date_list))
             val size = temp_bmiList.size-1
             for (i in 0..size){
-                bmiList.add(0,temp_bmiList[i])
-                heightList.add(0,temp_heigtList[i])
-                massList.add(0,temp_massList[i])
-                dateList.add(0,temp_dateList[i])
+                bmiList.add(temp_bmiList[i])
+                heightList.add(temp_heigtList[i])
+                massList.add(temp_massList[i])
+                dateList.add(temp_dateList[i])
             }
+
         }
 
     }

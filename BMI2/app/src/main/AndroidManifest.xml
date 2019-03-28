@@ -11,12 +11,15 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".History"
+            android:label="History"
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".InfoBMI"
+            android:label="Info"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".About"
+            android:label="About"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"

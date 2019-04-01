@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.secondapp.row_models.FirstRow
 import com.squareup.picasso.Picasso
 
-class CustomAdapter(val imageList:ArrayList<String>, val nameList: ArrayList<String>, val dateList: ArrayList<String>, val tagList:ArrayList<String>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(val rowList: ArrayList<FirstRow>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.name)
         val image: ImageView = itemView.findViewById(R.id.picasso_image)
@@ -21,20 +22,17 @@ class CustomAdapter(val imageList:ArrayList<String>, val nameList: ArrayList<Str
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = nameList.size
+    override fun getItemCount(): Int = rowList.size
 
     override fun onBindViewHolder(holder: CustomAdapter.ViewHolder, position: Int) {
-        holder.name.text = nameList[position]
-        Picasso.get().load(imageList[position]).error(R.drawable.no_photo).into(holder.image)
-        holder.date.text = dateList[position]
-        holder.tags.text = tagList[position]
+        holder.name.text = rowList[position].name
+        Picasso.get().load(rowList[position].url).error(R.drawable.no_photo).into(holder.image)
+        holder.date.text = rowList[position].date
+        holder.tags.text = rowList[position].tags.joinToString()
     }
 
     fun removeItem(viewHolder: RecyclerView.ViewHolder) {
-        imageList.removeAt(viewHolder.adapterPosition)
-        nameList.removeAt(viewHolder.adapterPosition)
-        dateList.removeAt(viewHolder.adapterPosition)
-        tagList.removeAt(viewHolder.adapterPosition)
+        rowList.removeAt(viewHolder.adapterPosition)
         notifyItemRemoved(viewHolder.adapterPosition)
     }
 

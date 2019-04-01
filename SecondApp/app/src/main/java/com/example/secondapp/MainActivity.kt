@@ -8,9 +8,11 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.secondapp.row_models.FirstRow
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,20 +20,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val imageList = ArrayList<String>()
-        val nameList = ArrayList<String>()
-        val dateList = ArrayList<String>()
-        val tagList = ArrayList<String>()
+
+        val rowList = ArrayList<FirstRow>()
 
         val simpleDate = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
 
-        imageList.add("wtf")
-        nameList.add("Boniek")
-        dateList.add(simpleDate.format(Date()))
-        tagList.add("cosTam")
+
+        val tagsForRow = ArrayList<String>()
+        tagsForRow.add("cosTam123")
+        tagsForRow.add("JEszcze jeden")
+        rowList.add(FirstRow("Boniek", "wtf", simpleDate.format(Date()), tagsForRow))
 
         recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.adapter = CustomAdapter(imageList, nameList, dateList, tagList)
+        recycler_view.adapter = CustomAdapter(rowList)
 
         val itemTouchHelperCallback = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
             override fun onMove(

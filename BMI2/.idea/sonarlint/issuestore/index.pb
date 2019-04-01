@@ -9,3 +9,5 @@ a
 1app/src/main/java/com/example/bmi/MainActivity.kt,e/f/ef8c94dc351bd5f8868d46fffe93c66a0e99e51d
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+\
+,app/src/main/java/com/example/bmi/History.kt,c/c/cc47edc45dc8cf95d01bd1abc38bd54de6537c27

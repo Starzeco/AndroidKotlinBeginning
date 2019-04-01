@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,6 +32,24 @@ class MainActivity : AppCompatActivity() {
 
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.adapter = CustomAdapter(imageList, nameList, dateList, tagList)
+
+        val itemTouchHelperCallback = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                (recycler_view.adapter as CustomAdapter).removeItem(viewHolder)
+            }
+
+        }
+
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(recycler_view)
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean{
         val inflater: MenuInflater = menuInflater

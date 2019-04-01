@@ -30,5 +30,13 @@ class CustomAdapter(val imageList:ArrayList<String>, val nameList: ArrayList<Str
         holder.tags.text = tagList[position]
     }
 
+    fun removeItem(viewHolder: RecyclerView.ViewHolder) {
+        imageList.removeAt(viewHolder.adapterPosition)
+        nameList.removeAt(viewHolder.adapterPosition)
+        dateList.removeAt(viewHolder.adapterPosition)
+        tagList.removeAt(viewHolder.adapterPosition)
+        notifyItemRemoved(viewHolder.adapterPosition)
+    }
+
 
 }

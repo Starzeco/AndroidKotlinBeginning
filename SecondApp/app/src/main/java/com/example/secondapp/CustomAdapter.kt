@@ -28,7 +28,7 @@ class CustomAdapter(val rowList: ArrayList<FirstRow>): RecyclerView.Adapter<Cust
         holder.name.text = rowList[position].name
         Picasso.get().load(rowList[position].url).error(R.drawable.no_photo).into(holder.image)
         holder.date.text = rowList[position].date
-        holder.tags.text = rowList[position].tags.joinToString()
+        holder.tags.text = rowList[position].tags
     }
 
     fun removeItem(viewHolder: RecyclerView.ViewHolder) {

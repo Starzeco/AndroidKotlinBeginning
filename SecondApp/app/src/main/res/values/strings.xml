@@ -5,7 +5,7 @@
     <string name="picasso_image">Picasso_image</string>
     <string name="date">Date</string>
     <string name="tags">Tags</string>
-    <string name="name_text">Name: </string>
-    <string name="date_text">Date: </string>
-    <string name="tags_text">Tags: </string>
+    <string name="name_text">Name:</string>
+    <string name="date_text">Date:</string>
+    <string name="tags_text">Tags:</string>
 </resources>

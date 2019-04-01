@@ -2,6 +2,7 @@ package com.example.secondapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -15,13 +16,17 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        const val ROW_ARRAY = "rowArray"
+    }
+    val rowList = ArrayList<FirstRow>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-        val rowList = ArrayList<FirstRow>()
+
 
         val simpleDate = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
 
@@ -29,7 +34,9 @@ class MainActivity : AppCompatActivity() {
         val tagsForRow = ArrayList<String>()
         tagsForRow.add("cosTam123")
         tagsForRow.add("JEszcze jeden")
-        rowList.add(FirstRow("Boniek", "wtf", simpleDate.format(Date()), tagsForRow))
+        val rowToAdd = FirstRow("Boniek", "wtf", simpleDate.format(Date()), tagsForRow.joinToString())
+
+        rowList.add(rowToAdd)
 
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.adapter = CustomAdapter(rowList)
@@ -67,5 +74,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        if(outState != null){
+            outState.putParcelableArrayList(ROW_ARRAY, rowList)
+        }
+    }
+
+   override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if( savedInstanceState != null){
+            val tempList: ArrayList<FirstRow> = savedInstanceState.getParcelableArrayList<FirstRow>(ROW_ARRAY)
+            val range:Int = tempList.size-1
+            for(i in 0..range){
+                rowList.add(tempList[i])
+            }
+        }
     }
 }

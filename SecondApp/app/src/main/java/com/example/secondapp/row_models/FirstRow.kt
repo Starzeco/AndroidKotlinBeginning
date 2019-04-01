@@ -1,5 +1,10 @@
 package com.example.secondapp.row_models
 
-class FirstRow(val name:String, val url: String, val date: String, val tags: ArrayList<String>) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
+@Parcelize
+class FirstRow(val name:String, val url: String, val date: String, val tags: String) : Parcelable {
 
 }

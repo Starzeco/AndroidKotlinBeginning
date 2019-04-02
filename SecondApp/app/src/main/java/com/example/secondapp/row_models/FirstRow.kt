@@ -5,6 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-class FirstRow(val name:String, val url: String, val date: String, val tags: String) : Parcelable {
+class FirstRow(val name:String, val url: String, val date: String, val tags: ArrayList<String>) : Parcelable {
 
 }

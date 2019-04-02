@@ -8,4 +8,14 @@
     <string name="name_text">Name:</string>
     <string name="date_text">Date:</string>
     <string name="tags_text">Tags:</string>
+    <string name="name_hint">Provide Name</string>
+    <string name="date_hint">Provide date</string>
+    <string name="url_hint">Provide URL</string>
+    <string name="url">URL</string>
+    <string name="tags_hint">Provide Tags</string>
+    <string name="add_button">Click for fun</string>
+    <string name="add_page">Adding Page</string>
+    <string name="error_name">Provide name from 5 to 30 letters</string>
+    <string name="error_url">Provide valid url</string>
+    <string name="arrow">Arrow</string>
 </resources>

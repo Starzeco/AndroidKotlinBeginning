@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="blueBackground">#E7EAF6</color>
     <color name="blueFront">#A2A8D3</color>
+    <color name="blueTop">#113F67</color>
 </resources>

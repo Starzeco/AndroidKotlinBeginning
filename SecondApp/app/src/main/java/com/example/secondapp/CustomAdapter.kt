@@ -26,7 +26,7 @@ class CustomAdapter(val rowList: ArrayList<FirstRow>): RecyclerView.Adapter<Cust
 
     override fun onBindViewHolder(holder: CustomAdapter.ViewHolder, position: Int) {
         holder.name.text = rowList[position].name
-        Picasso.get().load(rowList[position].url).error(R.drawable.no_photo).into(holder.image)
+        Picasso.get().load(rowList[position].url).resize(70, 50).error(R.drawable.no_photo).into(holder.image)
         holder.date.text = rowList[position].date
         holder.tags.text = rowList[position].tags.joinToString(limit = 3)
     }

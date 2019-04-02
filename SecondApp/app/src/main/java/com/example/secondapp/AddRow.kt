@@ -1,12 +1,14 @@
 package com.example.secondapp
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.URLUtil
 import com.example.secondapp.row_models.FirstRow
 import kotlinx.android.synthetic.main.activity_add_row.*
+import java.util.*
 
 class AddRow : AppCompatActivity() {
 
@@ -38,6 +40,18 @@ class AddRow : AppCompatActivity() {
             intent.putParcelableArrayListExtra(CREATED_ROW_LIST, rowList)
             setResult(Activity.RESULT_OK, intent)
             finish()
+        }
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        date_input.isFocusable = false
+        date_input.setOnClickListener {
+            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{view, myear, mmonth, dayOfMonth ->
+                val temp = mmonth+1
+                date_input.setText("$dayOfMonth/$temp/$myear")
+            },year, month, day )
+            dpd.show()
         }
 
     }

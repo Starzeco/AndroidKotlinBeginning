@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "258118410362",
+    "firebase_url": "https://lab2-838f9.firebaseio.com",
+    "project_id": "lab2-838f9",
+    "storage_bucket": "lab2-838f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258118410362:android:e5f77f0d9c580d93",
+        "android_client_info": {
+          "package_name": "com.example.lab3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9hAKNL75NdpaGSuWd-O6lyM_n5y-NqsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258118410362-u2nquec5nk70dgcvkijk4ovu5djilhg6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

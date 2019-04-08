@@ -56,22 +56,6 @@
             android:hint="@string/date_hint"
             android:ems="10"
             android:id="@+id/date_input"/>
-    <TextView
-            android:text="@string/tags"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/date_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tags_text_add"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tags_text_add"
-            android:ems="10"
-            android:id="@+id/tags_input"
-            android:hint="@string/tags_hint"/>
     <Button
             android:text="@string/add_button"
             android:layout_width="match_parent"
@@ -85,7 +69,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/tags_input"
+            android:layout_below="@+id/date_input"
             android:background="@null"
             android:id="@+id/imageButton" android:contentDescription="@string/arrow" android:visibility="visible"/>
 

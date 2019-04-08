@@ -24,13 +24,10 @@ class AddRow : AppCompatActivity() {
         add_button.setOnClickListener {
             if(validate()){
 
-                val tags = tags_input.text.toString().splitToSequence(',').filter { it.isNotBlank() }.toList()
-                val arrayTags = ArrayList<String>()
-                arrayTags.addAll(tags)
                 val name = name_input.text.toString()
                 val url = url_input.text.toString()
                 val date = date_input.text.toString()
-                rowList.add(FirstRow(name, url, date, arrayTags))
+                rowList.add(FirstRow(name, url, date))
             }else{
                 clearInputs()
             }
@@ -66,6 +63,5 @@ class AddRow : AppCompatActivity() {
         name_input.setText("")
         url_input.setText("")
         date_input.setText("")
-        tags_input.setText("")
     }
 }

@@ -13,3 +13,5 @@ h
 8app/src/main/java/com/example/secondapp/CustomAdapter.kt,7/6/760d115689a2d44a89fd5e08429f53e41f17e3ff
 a
 1app/src/main/java/com/example/secondapp/AddRow.kt,6/1/611315c2796965a4400cf2e26ca34d0147cde036
+H
+app/google-services.json,f/d/fd8d34b142d02ec743a8efefefd2c097961666e9

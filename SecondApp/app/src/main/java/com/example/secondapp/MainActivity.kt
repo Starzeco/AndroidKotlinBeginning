@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.adapter = CustomAdapter(rowList)
+        recycler_view.adapter = CustomAdapter(rowList, this)
+
 
         val itemTouchHelperCallback = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
             override fun onMove(
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
             val list = data.getParcelableArrayListExtra<FirstRow>(ROW_LIST_TO_GET)
             rowList.addAll(list)
-            recycler_view.adapter = CustomAdapter(rowList)
+            recycler_view.adapter = CustomAdapter(rowList, this)
         }
     }
 }

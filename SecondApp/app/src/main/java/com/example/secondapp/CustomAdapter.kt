@@ -1,5 +1,7 @@
 package com.example.secondapp
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -7,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.secondapp.row_models.FirstRow
 import com.google.firebase.ml.vision.FirebaseVision
@@ -15,12 +18,17 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import java.lang.Exception
 
-class CustomAdapter(val rowList: ArrayList<FirstRow>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(val rowList: ArrayList<FirstRow>, val context: Context): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.name)
         val image: ImageView = itemView.findViewById(R.id.picasso_image)
         val date: TextView = itemView.findViewById(R.id.date)
         val tags: TextView = itemView.findViewById(R.id.tags)
+
+    }
+
+    companion object {
+        const val ROW_LIST = "rowList"
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomAdapter.ViewHolder {
@@ -54,6 +62,11 @@ class CustomAdapter(val rowList: ArrayList<FirstRow>): RecyclerView.Adapter<Cust
 
         })
         holder.date.text = rowList[position].date
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, ActivityWithFragments::class.java)
+            intent.putParcelableArrayListExtra(ROW_LIST, rowList)
+            startActivity(context, intent, null)
+        }
     }
 
     fun removeItem(viewHolder: RecyclerView.ViewHolder) {

@@ -15,3 +15,7 @@ a
 1app/src/main/java/com/example/secondapp/AddRow.kt,6/1/611315c2796965a4400cf2e26ca34d0147cde036
 H
 app/google-services.json,f/d/fd8d34b142d02ec743a8efefefd2c097961666e9
+p
+@app/src/main/java/com/example/secondapp/ActivityWithFragments.kt,0/a/0ad135d1c94b7faea829acc92fb8fc179afd9379
+r
+Bapp/src/main/java/com/example/secondapp/fragments/PhotoFragment.kt,5/6/56474e1c79463f64b4953777e91ebe556da41447

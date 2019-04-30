@@ -18,4 +18,5 @@
     <string name="error_name">Provide name from 5 to 30 letters</string>
     <string name="error_url">Provide valid url</string>
     <string name="arrow">Arrow</string>
+    <string name="desc_frag_photo">Fragment Photo</string>
 </resources>

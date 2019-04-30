@@ -29,6 +29,7 @@ class CustomAdapter(val rowList: ArrayList<FirstRow>, val context: Context): Rec
 
     companion object {
         const val ROW_LIST = "rowList"
+        const val POSITION = "position"
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomAdapter.ViewHolder {
@@ -65,6 +66,7 @@ class CustomAdapter(val rowList: ArrayList<FirstRow>, val context: Context): Rec
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ActivityWithFragments::class.java)
             intent.putParcelableArrayListExtra(ROW_LIST, rowList)
+            intent.putExtra(POSITION, position)
             startActivity(context, intent, null)
         }
     }

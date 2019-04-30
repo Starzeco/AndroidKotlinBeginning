@@ -25,7 +25,7 @@ class PhotoFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.photo_fragment, container, false)
         val image = view.findViewById<ImageView>(R.id.photo)
-        Picasso.get().load(arguments!!.getString(URL)).resize(70, 50).error(R.drawable.no_photo).into(image)
+        Picasso.get().load(arguments?.getString(URL)).resize(70, 50).error(R.drawable.no_photo).into(image)
         return view
     }
 

@@ -6,4 +6,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/activity_with_fragments"
-        tools:context=".ActivityWithFragments"/>
+        tools:context=".ActivityWithFragments">
+    <Button
+            android:text="@string/switch_frag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/switcher"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                android:id="@+id/guideline3"
+                                                android:orientation="horizontal"
+                                                app:layout_constraintGuide_percent="0.9"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

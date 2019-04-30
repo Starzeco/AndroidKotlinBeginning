@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,10 +54,12 @@ class CustomAdapter(val rowList: ArrayList<FirstRow>, val context: Context): Rec
                 FirebaseVision.getInstance().onDeviceImageLabeler
                     .processImage(FirebaseVisionImage.fromBitmap(bitmap!!))
                     .addOnSuccessListener {
-                        holder.tags.text = it.map { it.text }
+                        val list = it.map { it.text }
                             .toTypedArray()
                             .take(3)
-                            .joinToString(", ")
+                        holder.tags.text = list.joinToString(", ")
+                        rowList[position].tags.clear()
+                        rowList[position].tags.addAll(list)
                     }
             }
 
@@ -74,6 +77,8 @@ class CustomAdapter(val rowList: ArrayList<FirstRow>, val context: Context): Rec
     fun removeItem(viewHolder: RecyclerView.ViewHolder) {
         rowList.removeAt(viewHolder.adapterPosition)
         notifyItemRemoved(viewHolder.adapterPosition)
+        notifyItemRangeChanged(viewHolder.adapterPosition, rowList.size-viewHolder.adapterPosition)
+
     }
 
 

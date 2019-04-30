@@ -13,6 +13,9 @@ class ActivityWithFragments : AppCompatActivity() {
     companion object {
         const val ROW_LIST = "rowList"
         const val POSITION = "position"
+        const val PHOTO = "Photo"
+        const val DETAIL = "Detail"
+        const val LIST = "List"
     }
     var isFirstFragment = true
 
@@ -30,15 +33,15 @@ class ActivityWithFragments : AppCompatActivity() {
         if(savedInstanceState == null){
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.activity_with_fragments, fragmentPhoto, "Photo")
+                .add(R.id.activity_with_fragments, fragmentPhoto, PHOTO)
                 .commit()
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.activity_with_fragments, fragmentDetail, "Detail")
+                .add(R.id.activity_with_fragments, fragmentDetail, DETAIL)
                 .commit()
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.activity_with_fragments, fragmentList, "List")
+                .add(R.id.activity_with_fragments, fragmentList, LIST)
                 .commit()
             supportFragmentManager
                 .beginTransaction()

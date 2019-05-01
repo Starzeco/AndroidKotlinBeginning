@@ -25,7 +25,7 @@ class ActivityWithFragments : AppCompatActivity() {
 
         val rowList = intent.getParcelableArrayListExtra<FirstRow>(ROW_LIST)
         val position = intent.getIntExtra(POSITION, -1)
-
+        //TODO wyjąć to z tej metody, do osobnych metod
         val fragmentPhoto = PhotoFragment.newInstance(rowList[position].url)
         val fragmentDetail = DetailFragment.newInstance(rowList[position])
         val fragmentList = ListFragment.newInstance(rowList, position)

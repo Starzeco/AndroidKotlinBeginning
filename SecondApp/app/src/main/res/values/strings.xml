@@ -20,4 +20,6 @@
     <string name="arrow">Arrow</string>
     <string name="desc_frag_photo">Fragment Photo</string>
     <string name="switch_frag">Switch fragments</string>
+    <string name="description">Photo List Description</string>
+    <string name="details">Details:</string>
 </resources>

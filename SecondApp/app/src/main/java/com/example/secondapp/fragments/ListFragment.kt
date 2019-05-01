@@ -27,7 +27,7 @@ class ListFragment: Fragment() {
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.list_fragment, container, false)
-        val firstImage = view.findViewById<ImageView>(R.id.fifth_photo)
+        val firstImage = view.findViewById<ImageView>(R.id.first_photo)
         val secondImage = view.findViewById<ImageView>(R.id.second_photo)
         val thirdImage = view.findViewById<ImageView>(R.id.third_photo)
         val fourthImage = view.findViewById<ImageView>(R.id.fourth_photo)
@@ -45,7 +45,7 @@ class ListFragment: Fragment() {
         val position: Int = arguments!!.getInt(POSITION)
         val row = rowList.removeAt(position)
         rowList!!.sortWith(compareBy { it.countFitness(row) })
-        return ArrayList(rowList.take(6))
+        return ArrayList(rowList.takeLast(6).filter { it.countFitness(row) != 0 })
 
     }
 }

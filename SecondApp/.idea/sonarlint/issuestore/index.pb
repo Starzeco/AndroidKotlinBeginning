@@ -19,3 +19,7 @@ p
 @app/src/main/java/com/example/secondapp/ActivityWithFragments.kt,0/a/0ad135d1c94b7faea829acc92fb8fc179afd9379
 r
 Bapp/src/main/java/com/example/secondapp/fragments/PhotoFragment.kt,5/6/56474e1c79463f64b4953777e91ebe556da41447
+q
+Aapp/src/main/java/com/example/secondapp/fragments/ListFragment.kt,b/4/b44320cc93296ac6adb1bc2c117a9efd41f2a183
+s
+Capp/src/main/java/com/example/secondapp/fragments/DetailFragment.kt,b/1/b1e763f61110faf5749dce854d7265ffaea91b63

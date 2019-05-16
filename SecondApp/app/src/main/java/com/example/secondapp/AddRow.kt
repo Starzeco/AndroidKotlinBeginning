@@ -52,6 +52,7 @@ class AddRow : AppCompatActivity() {
         }
 
     }
+
     private fun validate(): Boolean {
         val name = name_input.text.toString()
         val url = url_input.text.toString()
@@ -59,6 +60,7 @@ class AddRow : AppCompatActivity() {
         if(name.length !in 6..29) name_input.error = getString(R.string.error_name)
         return URLUtil.isValidUrl(url) && name.length <30 && name.length > 5
     }
+
     private fun clearInputs() {
         name_input.setText("")
         url_input.setText("")

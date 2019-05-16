@@ -18,6 +18,9 @@ class ActivityWithFragments : AppCompatActivity() {
         const val LIST = "List"
     }
     var isFirstFragment = true
+    lateinit var fragmentPhoto: PhotoFragment
+    lateinit var fragmentDetail: DetailFragment
+    lateinit var fragmentList: ListFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +28,10 @@ class ActivityWithFragments : AppCompatActivity() {
 
         val rowList = intent.getParcelableArrayListExtra<FirstRow>(ROW_LIST)
         val position = intent.getIntExtra(POSITION, -1)
-        //TODO wyjąć to z tej metody, do osobnych metod
-        val fragmentPhoto = PhotoFragment.newInstance(rowList[position].url)
-        val fragmentDetail = DetailFragment.newInstance(rowList[position])
-        val fragmentList = ListFragment.newInstance(rowList, position)
+
+        fragmentPhoto = PhotoFragment.newInstance(rowList[position].url)
+        fragmentDetail = DetailFragment.newInstance(rowList[position])
+        fragmentList = ListFragment.newInstance(rowList, position)
 
         if(savedInstanceState == null){
             supportFragmentManager
@@ -43,46 +46,47 @@ class ActivityWithFragments : AppCompatActivity() {
                 .beginTransaction()
                 .add(R.id.activity_with_fragments, fragmentList, LIST)
                 .commit()
-            supportFragmentManager
-                .beginTransaction()
-                .hide(fragmentDetail)
-                .commit()
-            supportFragmentManager
-                .beginTransaction()
-                .hide(fragmentList)
-                .commit()
+            hideDetailAndListFragment()
         }
         switcher.setOnClickListener {
             isFirstFragment = if(isFirstFragment){
-                supportFragmentManager
-                    .beginTransaction()
-                    .hide(fragmentPhoto)
-                    .commit()
-                supportFragmentManager
-                    .beginTransaction()
-                    .show(fragmentDetail)
-                    .commit()
-                supportFragmentManager.
-                    beginTransaction()
-                    .show(fragmentList)
-                    .commit()
+                showDetailAndListFragment()
                 false
             }else{
                 supportFragmentManager
                     .beginTransaction()
                     .show(fragmentPhoto)
                     .commit()
-                supportFragmentManager
-                    .beginTransaction()
-                    .hide(fragmentDetail)
-                    .commit()
-                supportFragmentManager
-                    .beginTransaction()
-                    .hide(fragmentList)
-                    .commit()
+                hideDetailAndListFragment()
                 true
             }
         }
+    }
+
+    private fun hideDetailAndListFragment(){
+        supportFragmentManager
+            .beginTransaction()
+            .hide(fragmentDetail)
+            .commit()
+        supportFragmentManager
+            .beginTransaction()
+            .hide(fragmentList)
+            .commit()
+    }
+
+    private fun showDetailAndListFragment(){
+        supportFragmentManager
+            .beginTransaction()
+            .hide(fragmentPhoto)
+            .commit()
+        supportFragmentManager
+            .beginTransaction()
+            .show(fragmentDetail)
+            .commit()
+        supportFragmentManager.
+            beginTransaction()
+            .show(fragmentList)
+            .commit()
     }
 
 }

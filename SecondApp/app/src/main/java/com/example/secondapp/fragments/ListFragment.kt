@@ -25,6 +25,7 @@ class ListFragment: Fragment() {
             return fragment
         }
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.list_fragment, container, false)
         val firstImage = view.findViewById<ImageView>(R.id.first_photo)
@@ -40,6 +41,7 @@ class ListFragment: Fragment() {
         }
         return view
     }
+
     private fun findSixSimilar(): ArrayList<FirstRow>{
         val rowList = arguments!!.getParcelableArrayList<FirstRow>(ROW_LIST)
         val position: Int = arguments!!.getInt(POSITION)

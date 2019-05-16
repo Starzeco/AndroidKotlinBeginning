@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(recycler_view)
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean{
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
@@ -80,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             rowList.addAll(tempList)
         }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK && data!=null){

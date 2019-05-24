@@ -23,3 +23,5 @@ q
 Aapp/src/main/java/com/example/secondapp/fragments/ListFragment.kt,b/4/b44320cc93296ac6adb1bc2c117a9efd41f2a183
 s
 Capp/src/main/java/com/example/secondapp/fragments/DetailFragment.kt,b/1/b1e763f61110faf5749dce854d7265ffaea91b63
+y
+Iapp/src/androidTest/java/com/example/secondapp/ExampleInstrumentedTest.kt,7/7/770bedc52ab6e0e5f3be9c5725a2607759ef2b0b

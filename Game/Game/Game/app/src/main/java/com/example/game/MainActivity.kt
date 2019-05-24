@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     var counter: Int = 0
 
     lateinit var sound: MediaPlayer
+    lateinit var backgroundSound: MediaPlayer
 
     var currentX = 0f
     var currentY = 0f
@@ -39,10 +40,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         setContentView(R.layout.activity_main)
 
         sound = MediaPlayer.create(this, R.raw.egg)
-        val backgroundSound = MediaPlayer.create(this, R.raw.pokemon)
-        backgroundSound.isLooping = true
+        backgroundSound = MediaPlayer.create(this, R.raw.pokemon)
         backgroundSound.start()
-
+        backgroundSound.isLooping = true
 
         val display = windowManager.defaultDisplay
         val size = Point()
@@ -63,13 +63,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         springAnimY = findViewById<View>(R.id.imageView5).let { img ->
             SpringAnimation(img, DynamicAnimation.TRANSLATION_Y, currentY)
         }
-        button.setOnClickListener {
-            textView.text = counter.toString()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onPause() {
@@ -108,6 +101,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 if (event.values[0] < 500) {
                     if (counter > Random.nextInt(10, 30)) {
                         counter = 0
+                        if(!backgroundSound.isPlaying) backgroundSound.start()
                         val random = Random.nextInt(10)
                         when (random) {
                             0 -> {

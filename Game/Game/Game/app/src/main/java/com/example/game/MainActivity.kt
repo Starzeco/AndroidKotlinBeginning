@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     lateinit var springAnimX: SpringAnimation
     lateinit var springAnimY: SpringAnimation
     lateinit var sensorManager: SensorManager
-    var mGyro: Sensor? = null
+    var accel: Sensor? = null
+    var light: Sensor? = null
 
     var width: Int = 0
     var height :Int = 0
@@ -36,7 +37,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         height = size.y
 
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        mGyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
 
         springAnimX = findViewById<View>(R.id.imageView5).let { img ->
             SpringAnimation(img, DynamicAnimation.TRANSLATION_X, 0f)
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume() {
         super.onResume()
-        sensorManager.registerListener(this, mGyro, SensorManager.SENSOR_DELAY_GAME)
+        sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_GAME)
     }
 
     override fun onPause() {

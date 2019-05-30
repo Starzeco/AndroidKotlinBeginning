@@ -28,6 +28,7 @@
             android:id="@+id/podpowiedz"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="50dp"
@@ -96,6 +97,6 @@
             android:id="@+id/seen" android:visibility="invisible"
             android:textColor="@color/purple" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/psyView"/>
+            app:layout_constraintBottom_toTopOf="@+id/psyView" android:textSize="18sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

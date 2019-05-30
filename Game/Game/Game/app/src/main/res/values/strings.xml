@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Game</string>
+    <string name="found_egg">Znalazłeś jajko</string>
+    <string name="found_eevee">Znalazłeś eevee</string>
+    <string name="found_mankey">Znalazłeś mankey\'a</string>
+    <string name="found_jigg">Znalazłeś jigglypuff\'a</string>
+    <string name="found_pidgey">Znalazłeś pdigey\'a</string>
+    <string name="found_caterpie">Znalazłeś caterpie</string>
+    <string name="found_meowth">Znalazłeś meowth\'a</string>
+    <string name="found_charmander">Znalazłeś charmander\'a</string>
+    <string name="found_psyduck">Znalazłeś psyduck\'a</string>
+    <string name="found_pikachu">Znalazłeś pikachu</string>
+    <string name="turn_off_light">Spróbuj zgasić świtało</string>
+    <string name="try_again">Próbuj dalej</string>
+    <string name="hit">Uderz o krawędź</string>
+    <string name="game_over">Widziałeś już wszystkie pokemony, naciśnij na Pokemona, by zacząć od nowa</string>
 </resources>

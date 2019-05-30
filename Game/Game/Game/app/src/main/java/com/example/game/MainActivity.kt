@@ -19,19 +19,15 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
     companion object {
-        const val TURN_OFF_LIGHT = "Spróbuj zgasić świtało"
-        const val TRY_AGAIN = "Próbuj dalej"
-        const val FOUND_PIKACHU = "Znalazłeś pikachu"
-        const val FOUND_PSYDUCK = "Znalazłeś psyduck'a"
-        const val FOUND_CHARM = "Znalazłeś charmander'a"
-        const val FOUND_MEOWTH = "Znalazłeś meowth'a"
-        const val FOUND_CATERPIE = "Znalazłeś caterpie"
-        const val FOUND_PIDGEY = "Znalazłeś pdigey'a"
-        const val FOUND_JIGG = "Znalazłeś jigglypuff'a"
-        const val FOUND_MANKEY = "Znalazłeś mankey'a"
-        const val FOUND_EEVEE = "Znalazłeś eevee"
-        const val FOUND_EGG = "Znalazłeś jajko"
-        const val HIT = "Uderz o krawędź"
+        const val CATERPIE = "caterpie"
+        const val CHARMANDER = "charmander"
+        const val PIKACHU = "pikachu"
+        const val MEOWTH = "meowth"
+        const val PSYDUCK = "psyduck"
+        const val PIDGEY = "pidgey"
+        const val JIGG = "jigg"
+        const val MANKEY = "mankey"
+        const val EEVEE = "eevee"
     }
 
     lateinit var springAnimX: SpringAnimation
@@ -39,12 +35,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     lateinit var sensorManager: SensorManager
     var accel: Sensor? = null
     var light: Sensor? = null
+    
     var firstGo = true
-
     var width: Int = 0
     var height :Int = 0
-
     var counter: Int = 0
+    var seenPokemons = ArrayList<String>()
 
     lateinit var sound: MediaPlayer
     lateinit var backgroundSound: MediaPlayer
@@ -67,7 +63,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         width = size.x
         height = size.y
 
-        podpowiedz.text = HIT
+        podpowiedz.text = getString(R.string.hit)
         podpowiedz.textSize = 24f
 
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
@@ -105,7 +101,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     springAnimX.start()
                     springAnimY.start()
                     if(counter >=10){
-                        podpowiedz.text = TURN_OFF_LIGHT
+                        podpowiedz.text = getString(R.string.turn_off_light)
                     }
                 } else {
                     val forceX = SpringForce(-currentX)
@@ -121,7 +117,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     springAnimY.start()
                 }
             } else {
-                if (event.values[0] < 1000) {
+                if (event.values[0] < 5000) {
                     if (counter > Random.nextInt(10, 30)) {
                         if(firstGo){
                             seen.visibility = View.VISIBLE
@@ -135,70 +131,109 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                             0 -> {
                                 imageView5.setImageResource(R.mipmap.custom_caterpie_foreground)
                                 sound = MediaPlayer.create(this, R.raw.caterpie)
-                                podpowiedz.text = FOUND_CATERPIE
+                                podpowiedz.text = getString(R.string.found_caterpie)
                                 caterpieView.visibility = View.VISIBLE
+                                addIfDontContains(CATERPIE)
                             }
                             1 -> {
                                 imageView5.setImageResource(R.mipmap.custom_charmander_foreground)
                                 sound = MediaPlayer.create(this, R.raw.charmander)
-                                podpowiedz.text = FOUND_CHARM
+                                podpowiedz.text = getString(R.string.found_charmander)
                                 charmView.visibility = View.VISIBLE
+                                addIfDontContains(CHARMANDER)
                             }
                             2 -> {
                                 imageView5.setImageResource(R.mipmap.custom_eevee_foreground)
                                 sound = MediaPlayer.create(this, R.raw.eevee)
-                                podpowiedz.text = FOUND_EEVEE
+                                podpowiedz.text = getString(R.string.found_eevee)
                                 eeveeView.visibility = View.VISIBLE
+                                addIfDontContains(EEVEE)
                             }
                             3 -> {
                                 imageView5.setImageResource(R.mipmap.custom_egg_foreground)
                                 sound = MediaPlayer.create(this, R.raw.egg)
-                                podpowiedz.text = FOUND_EGG
+                                podpowiedz.text = getString(R.string.found_egg)
                             }
                             4 -> {
                                 imageView5.setImageResource(R.mipmap.custom_jigg_foreground)
                                 sound = MediaPlayer.create(this, R.raw.jigg)
-                                podpowiedz.text = FOUND_JIGG
+                                podpowiedz.text = getString(R.string.found_jigg)
                                 jiggView.visibility = View.VISIBLE
+                                addIfDontContains(JIGG)
                             }
                             5 -> {
                                 imageView5.setImageResource(R.mipmap.custom_mankey_foreground)
                                 sound = MediaPlayer.create(this, R.raw.mankey)
-                                podpowiedz.text = FOUND_MANKEY
+                                podpowiedz.text = getString(R.string.found_mankey)
                                 mankeyView.visibility = View.VISIBLE
+                                addIfDontContains(MANKEY)
                             }
                             6 -> {
                                 imageView5.setImageResource(R.mipmap.custom_meowth_foreground)
                                 sound = MediaPlayer.create(this, R.raw.meowth)
-                                podpowiedz.text = FOUND_MEOWTH
+                                podpowiedz.text = getString(R.string.found_meowth)
                                 meowthView.visibility = View.VISIBLE
+                                addIfDontContains(MEOWTH)
                             }
                             7 -> {
                                 imageView5.setImageResource(R.mipmap.custom_pidgey_foreground)
                                 sound = MediaPlayer.create(this, R.raw.pidgey)
-                                podpowiedz.text = FOUND_PIDGEY
+                                podpowiedz.text = getString(R.string.found_pidgey)
                                 pidgeyView.visibility = View.VISIBLE
+                                addIfDontContains(PIDGEY)
                             }
                             8 -> {
                                 imageView5.setImageResource(R.mipmap.custom_pikachu_foreground)
                                 sound = MediaPlayer.create(this, R.raw.pikachu)
-                                podpowiedz.text = FOUND_PIKACHU
+                                podpowiedz.text = getString(R.string.found_pikachu)
                                 pikachuView.visibility = View.VISIBLE
+                                addIfDontContains(PIKACHU)
                             }
                             9 -> {
                                 imageView5.setImageResource(R.mipmap.custom_psy_foreground)
                                 sound = MediaPlayer.create(this, R.raw.psyduck)
-                                podpowiedz.text = FOUND_PSYDUCK
+                                podpowiedz.text = getString(R.string.found_psyduck)
                                 psyView.visibility = View.VISIBLE
+                                addIfDontContains(PSYDUCK)
                             }
                         }
+                        if(seenPokemons.size == 9){
+                            podpowiedz.text = getString(R.string.game_over)
+                            imageView5.setOnClickListener {
+                                seenPokemons.clear()
+                                setToInvisibleAll()
+                                imageView5.setImageResource(R.mipmap.custom_egg_foreground)
+                                imageView5.setOnClickListener(null)
+                            }
+                        }
+
                     } else {
-                        Toast.makeText(this, TRY_AGAIN, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.try_again), Toast.LENGTH_SHORT).show()
                     }
 
                 }
             }
         }
+    }
+    fun addIfDontContains(name: String){
+        if(!seenPokemons.contains(name)){
+            seenPokemons.add(name)
+        }
+    }
+
+    fun setToInvisibleAll(){
+        psyView.visibility = View.INVISIBLE
+        pikachuView.visibility = View.INVISIBLE
+        pidgeyView.visibility = View.INVISIBLE
+        meowthView.visibility = View.INVISIBLE
+        mankeyView.visibility = View.INVISIBLE
+        jiggView.visibility = View.INVISIBLE
+        eeveeView.visibility = View.INVISIBLE
+        charmView.visibility = View.INVISIBLE
+        caterpieView.visibility = View.INVISIBLE
+        seen.visibility = View.INVISIBLE
+        firstGo = true
+        podpowiedz.text = getString(R.string.hit)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {

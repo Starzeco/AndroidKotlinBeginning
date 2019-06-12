@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="width_big">0dp</dimen>
+    <dimen name="height_big">0dp</dimen>
+    <dimen name="margin_start_big">8dp</dimen>
+    <dimen name="margin_end_big">8dp</dimen>
+    <dimen name="margin_top_big">8dp</dimen>
+    <dimen name="margin_bottom_big">8dp</dimen>
+    <dimen name="guide_begin">244dp</dimen>
+    <dimen name="constrain_width">0dp</dimen>
+    <dimen name="constrain_height">0dp</dimen>
+    <dimen name="margin_end_constrain">8dp</dimen>
+    <dimen name="margin_start_constrain">8dp</dimen>
+    <dimen name="margin_top_constrain">8dp</dimen>
+    <dimen name="margin_bottom_constrain">8dp</dimen>
+    <dimen name="jablko1_width">99dp</dimen>
+    <dimen name="jablko1_height">95dp</dimen>
+    <dimen name="jablko1_margin_top">32dp</dimen>
+    <dimen name="jablko1_margin_start">8dp</dimen>
+    <dimen name="jablko1_margin_end">8dp</dimen>
+    <dimen name="jablko2_width">99dp</dimen>
+    <dimen name="jablko2_height">95dp</dimen>
+    <dimen name="jablko2_margin_end">8dp</dimen>
+    <dimen name="jablko2_margin_start">8dp</dimen>
+    <dimen name="jablko2_margin_bottom">8dp</dimen>
+    <dimen name="jablko2_margin_top">8dp</dimen>
+    <dimen name="jablko3_width">99dp</dimen>
+    <dimen name="jablko3_height">95dp</dimen>
+    <dimen name="jablko3_margin_bottom">32dp</dimen>
+    <dimen name="jablko3_margin_end">8dp</dimen>
+    <dimen name="jablko3_margin_start">8dp</dimen>
+</resources>

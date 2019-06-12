@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     springAnimY.start()
                 }
             } else {
-                if (event.values[0] < 5000) {
+                if (event.values[0] < 20) {
                     if (counter > Random.nextInt(10, 30)) {
                         if(firstGo){
                             seen.visibility = View.VISIBLE
@@ -215,6 +215,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
         }
     }
+
     fun addIfDontContains(name: String){
         if(!seenPokemons.contains(name)){
             seenPokemons.add(name)

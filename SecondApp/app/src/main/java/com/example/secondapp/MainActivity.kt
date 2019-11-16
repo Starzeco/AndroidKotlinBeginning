@@ -4,10 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.ListView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +23,11 @@ class MainActivity : AppCompatActivity() {
         const val ROW_ARRAY = "rowArray"
         const val ROW_LIST_TO_GET = "createdRowList"
         const val REQUEST_CODE = 1
+        const val SPEECH_REQUEST_CODE = 0
+
     }
     val rowList = ArrayList<FirstRow>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,11 +50,11 @@ class MainActivity : AppCompatActivity() {
                 (recycler_view.adapter as CustomAdapter).removeItem(viewHolder)
 
             }
-
         }
 
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(recycler_view)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean{
@@ -74,6 +80,11 @@ class MainActivity : AppCompatActivity() {
         outState?.putParcelableArrayList(ROW_ARRAY, rowList)
     }
 
+    override fun onStop() {
+        displaySpeechRecognizer()
+        super.onStop()
+    }
+
    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         if( savedInstanceState != null){
@@ -83,6 +94,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val spokenText: String? =
+                data!!.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).let { results ->
+                    results[0]
+                }
+            if (spokenText.equals("dog")){
+                startActivity(Intent(this, AddRow::class.java))
+            }
+            // Do something with spokenText
+        }
+
+
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK && data!=null){
 
@@ -91,4 +114,13 @@ class MainActivity : AppCompatActivity() {
             recycler_view.adapter = CustomAdapter(rowList, this)
         }
     }
+
+    fun displaySpeechRecognizer() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        }
+        // Start the activity, the intent will be populated with the speech text
+        startActivityForResult(intent, SPEECH_REQUEST_CODE)
+    }
+
 }

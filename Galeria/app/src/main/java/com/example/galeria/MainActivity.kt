@@ -13,6 +13,7 @@ import com.github.pwittchen.swipe.library.rx2.SwipeListener
 import android.view.MotionEvent
 import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.isInvisible
 
 
 class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, CoroutineScope {
@@ -22,14 +23,14 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Cor
         get() = Dispatchers.Main + job
 
     private lateinit var gestureDetector: GestureDetector
-    private var imageNumber = 1
     private val swipe = Swipe()
 
-    companion object{
+    companion object {
         private const val redText = "To jest czerwony obiekt"
         private const val greenText = "To jest zielony obiekt"
         private const val blueText = "To jest niebieski obiekt"
         private const val NUMBER_OF_IMAGES = 401
+        var imageNumber = 1
     }
 
     override fun onShowPress(e: MotionEvent?) {
@@ -123,6 +124,16 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Cor
 
         gestureDetector = GestureDetector(this, this)
 
+        runOnUiThread(Runnable {
+            while(true){
+
+                Thread.sleep(300L)
+                imageView.isInvisible = !imageView.isInvisible
+            }
+        })
+
+        //Thread(CircleThread(imageView)).start()
+
         swipe.setListener(object : SwipeListener {
             override fun onSwipingLeft(event: MotionEvent) {
                imageNumber += 2
@@ -131,7 +142,10 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Cor
                }
                 val id = resources.getIdentifier("k$imageNumber", "drawable", packageName)
                 val obraz = resources.getDrawable(id, theme)
+                val id2 = resources.getIdentifier("so${imageNumber}", "drawable", packageName)
+                val obraz2 = resources.getDrawable(id2, theme)
                 klatki.setImageDrawable(obraz)
+                imageView.setImageDrawable(obraz2)
             }
 
             override fun onSwipedLeft(event: MotionEvent): Boolean {
@@ -145,7 +159,10 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Cor
                 }
                 val id = resources.getIdentifier("k$imageNumber", "drawable", packageName)
                 val obraz = resources.getDrawable(id, theme)
+                val id2 = resources.getIdentifier("so${imageNumber}", "drawable", packageName)
+                val obraz2 = resources.getDrawable(id2, theme)
                 klatki.setImageDrawable(obraz)
+                imageView.setImageDrawable(obraz2)
             }
 
             override fun onSwipedRight(event: MotionEvent): Boolean {

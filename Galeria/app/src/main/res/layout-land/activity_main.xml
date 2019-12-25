@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="@+id/klatki"
         app:layout_constraintTop_toTopOf="@+id/klatki" />
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,5 +43,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        android:src="@drawable/so1" />
+        android:src="@drawable/so1" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -124,13 +124,13 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Cor
 
         gestureDetector = GestureDetector(this, this)
 
-        runOnUiThread(Runnable {
+        /*runOnUiThread(Runnable {
             while(true){
 
                 Thread.sleep(300L)
                 imageView.isInvisible = !imageView.isInvisible
             }
-        })
+        })*/
 
         //Thread(CircleThread(imageView)).start()
 
@@ -140,16 +140,19 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Cor
                if (imageNumber > NUMBER_OF_IMAGES) {
                    imageNumber = 1
                }
-                val id = resources.getIdentifier("k$imageNumber", "drawable", packageName)
+                val id = resources.getIdentifier("so$imageNumber", "drawable", packageName)
                 val obraz = resources.getDrawable(id, theme)
-                val id2 = resources.getIdentifier("so${imageNumber}", "drawable", packageName)
-                val obraz2 = resources.getDrawable(id2, theme)
+                /*val id2 = resources.getIdentifier("so${imageNumber}", "drawable", packageName)
+                val obraz2 = resources.getDrawable(id2, theme)*/
                 klatki.setImageDrawable(obraz)
-                imageView.setImageDrawable(obraz2)
+                //imageView.setImageDrawable(obraz2)
             }
 
             override fun onSwipedLeft(event: MotionEvent): Boolean {
-                return false
+                val id = resources.getIdentifier("k$imageNumber", "drawable", packageName)
+                val obraz = resources.getDrawable(id, theme)
+                klatki.setImageDrawable(obraz)
+                return true
             }
 
             override fun onSwipingRight(event: MotionEvent) {
@@ -157,17 +160,19 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Cor
                 if (imageNumber <= 0) {
                     imageNumber = NUMBER_OF_IMAGES
                 }
-                val id = resources.getIdentifier("k$imageNumber", "drawable", packageName)
+                val id = resources.getIdentifier("so$imageNumber", "drawable", packageName)
                 val obraz = resources.getDrawable(id, theme)
-                val id2 = resources.getIdentifier("so${imageNumber}", "drawable", packageName)
-                val obraz2 = resources.getDrawable(id2, theme)
+                /*val id2 = resources.getIdentifier("so${imageNumber}", "drawable", packageName)
+                val obraz2 = resources.getDrawable(id2, theme)*/
                 klatki.setImageDrawable(obraz)
-                imageView.setImageDrawable(obraz2)
+                //imageView.setImageDrawable(obraz2)
             }
 
             override fun onSwipedRight(event: MotionEvent): Boolean {
-                //info.setText("SWIPED_RIGHT")
-                return false
+                val id = resources.getIdentifier("k$imageNumber", "drawable", packageName)
+                val obraz = resources.getDrawable(id, theme)
+                klatki.setImageDrawable(obraz)
+                return true
             }
 
             override fun onSwipingUp(event: MotionEvent) {
